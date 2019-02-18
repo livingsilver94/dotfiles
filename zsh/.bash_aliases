@@ -1,0 +1,13 @@
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+alias g='git'
+alias ga='git add'
+alias gd='git diff'
+alias gcm='git checkout master'
+alias gb='git branch'
+alias gl='git pull'
+alias gp='git push'
+alias grh='git reset'
+alias grhh='git reset --hard'
+alias gst='git status'
