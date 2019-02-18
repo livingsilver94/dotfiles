@@ -14,7 +14,7 @@ Color=40,42,56
 Color=40,42,56
 
 [Color0Intense]
-Color=104,104,104
+Color=210,147,254
 
 [Color1]
 Color=255,92,87
@@ -90,6 +90,6 @@ Color=239,240,235
 
 [General]
 Blur=true
-Description=Customized Snazzy
-Opacity=0.66
+Description=Snazzy Derived
+Opacity=0.8
 Wallpaper=
