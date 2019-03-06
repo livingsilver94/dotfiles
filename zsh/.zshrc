@@ -33,8 +33,8 @@ fi
 # Rust config
 [ -f ~/.cargo/env ] && source ~/.cargo/env
 
-# Load aliases (shared with Bash)
-source ~/.bash_aliases
+# Load aliases
+source "$XDG_CONFIG_HOME/zsh/aliases"
 
 # Load plugins managed by antibody
 source "$XDG_CONFIG_HOME/zsh/zsh_plugins.sh"
