@@ -40,6 +40,6 @@ source "$XDG_CONFIG_HOME/zsh/aliases"
 source "$XDG_CONFIG_HOME/zsh/zsh_plugins.sh"
 
 antibody_edit() {
-	$EDITOR "$XDG_CONFIG_HOME/zsh/zsh_plugins.txt"
-	antibody bundle < "$XDG_CONFIG_HOME/zsh/zsh_plugins.txt" > "$XDG_CONFIG_HOME/zsh/zsh_plugins.sh"
+	$EDITOR "$XDG_CONFIG_HOME/zsh/zsh_plugins"
+	antibody bundle < "$XDG_CONFIG_HOME/zsh/zsh_plugins" > "$XDG_CONFIG_HOME/zsh/zsh_plugins.sh"
 }
