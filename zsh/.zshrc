@@ -3,6 +3,7 @@ export EDITOR=nano
 [ -z $XDG_CONFIG_HOME ] && export XDG_CONFIG_HOME=$HOME/.config
 
 HISTFILE="$XDG_DATA_HOME/zsh/history"
+mkdir -p "$(dirname "$HISTFILE")"
 HISTSIZE=1000				# Nr. commands to keep in HISTFILE
 SAVEHIST=500				# Nr. commands to save for a single session
 setopt hist_ignore_dups		# Ignore repeated commands in history
