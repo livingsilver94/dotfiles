@@ -1,0 +1,5 @@
+{
+    "editor.cursorSmoothCaretAnimation": true,
+    "workbench.iconTheme": "vscode-icon-theme",
+    "workbench.colorTheme": "Default Light+"
+}
