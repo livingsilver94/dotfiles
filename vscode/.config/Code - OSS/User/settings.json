@@ -1,5 +1,8 @@
 {
     "editor.cursorSmoothCaretAnimation": true,
     "workbench.iconTheme": "vscode-icon-theme",
+    "workbench.colorCustomizations": {
+        "editorBracketMatch.background": "#fffb00"
+    },
     "workbench.colorTheme": "Default Light+"
 }
