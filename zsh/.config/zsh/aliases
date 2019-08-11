@@ -11,3 +11,5 @@ alias gp='git push'
 alias grh='git reset'
 alias grhh='git reset --hard'
 alias gst='git status'
+
+alias lsusers='cut -d: -f1 /etc/passwd'
