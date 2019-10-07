@@ -2,6 +2,8 @@
 Description=Restic backup service
 [Service]
 Type=oneshot
+ExecStartPre=notify-send -u low -c transfer -i state-information -a 'Automatic backup' 'Backup starting'
 ExecStart=restic backup --verbose --one-file-system --tag systemd.timer $BACKUP_EXCLUDES $BACKUP_PATHS
 ExecStartPost=restic forget --verbose --tag systemd.timer --group-by "paths,tags" --keep-daily $RETENTION_DAYS --keep-weekly $RETENTION_WEEKS --keep-monthly $RETENTION_MONTHS --keep-yearly $RETENTION_YEARS
+ExecStartPost=notify-send -u low -c transfer.complete -i state-ok -a 'Automatic backup' 'Backup complete'
 EnvironmentFile=%E/restic-backup.conf
