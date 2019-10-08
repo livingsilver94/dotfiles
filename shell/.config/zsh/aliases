@@ -1,3 +1,8 @@
+antibody_edit() {
+	$EDITOR "$XDG_CONFIG_HOME/zsh/zsh_plugins"
+	antibody bundle < "$XDG_CONFIG_HOME/zsh/zsh_plugins" > "$XDG_CONFIG_HOME/zsh/zsh_plugins.sh"
+}
+
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
@@ -12,4 +17,4 @@ alias grh='git reset'
 alias grhh='git reset --hard'
 alias gst='git status'
 
-alias lsusers='cut -d: -f1 /etc/passwd'
+alias lsusers='cut -d: -f1 /etc/passwd | sort'
