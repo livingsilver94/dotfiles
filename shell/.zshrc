@@ -11,12 +11,11 @@ setopt hist_reduce_blanks			# Remove superfluous blanks in commands
 setopt autocd
 
 # Keybinds
-bindkey -e
 bindkey "$terminfo[khome]" beginning-of-line
 bindkey "$terminfo[kend]" end-of-line
 bindkey "$terminfo[kdch1]" delete-char
-bindkey "\e[1;5D" backward-word
-bindkey "\e[1;5C" forward-word
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
 # Hack to actually apply binds with $terminfo
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
 	function zle-line-init() {
