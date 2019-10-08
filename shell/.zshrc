@@ -1,10 +1,12 @@
+[ ! -d "$XDG_DATA_HOME/zsh" ] && mkdir "$XDG_DATA_HOME/zsh"
 HISTFILE="$XDG_DATA_HOME/zsh/history"
-mkdir -p "$(dirname "$HISTFILE")"
-HISTSIZE=1000				# Nr. commands to keep in HISTFILE
-SAVEHIST=500				# Nr. commands to save for a single session
-setopt hist_ignore_dups		# Ignore repeated commands in history
-setopt hist_ignore_space	# Don't insert cmds into hist if space is the leading char
-setopt hist_reduce_blanks
+HISTSIZE=2000	# Nr. commands to keep in HISTFILE
+SAVEHIST=2100	# Nr. commands to keep in memory for a session
+setopt share_history					# Share history between different instances of zsh
+setopt hist_expire_dups_first	# Expire duplicate entries first when trimming history
+setopt hist_ignore_dups				# Don't record an entry that was just recorded
+setopt hist_ignore_space			# Don't insert cmds into hist if space is the leading char
+setopt hist_reduce_blanks			# Remove superfluous blanks in commands
 
 setopt autocd
 
