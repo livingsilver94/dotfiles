@@ -18,3 +18,4 @@ alias grhh='git reset --hard'
 alias gst='git status'
 
 alias lsusers='cut -d: -f1 /etc/passwd | sort'
+alias up='sudo eopkg up'
