@@ -1,4 +1,6 @@
 [ ! -d "$XDG_DATA_HOME/zsh" ] && mkdir "$XDG_DATA_HOME/zsh"
+[ ! -d "$XDG_CACHE_HOME/zsh" ] && mkdir "$XDG_CACHE_HOME/zsh"
+
 HISTFILE="$XDG_DATA_HOME/zsh/history"
 HISTSIZE=2000	# Nr. commands to keep in HISTFILE
 SAVEHIST=2100	# Nr. commands to keep in memory for a session
@@ -7,6 +9,8 @@ setopt hist_expire_dups_first	# Expire duplicate entries first when trimming his
 setopt hist_ignore_dups			# Don't record an entry that was just recorded
 setopt hist_ignore_space		# Don't insert cmds into hist if space is the leading char
 setopt hist_reduce_blanks		# Remove superfluous blanks in commands
+
+autoload -U compinit && compinit -d $XDG_CACHE_HOME/zsh/zcompdump
 
 setopt autocd
 
