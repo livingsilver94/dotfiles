@@ -2,6 +2,7 @@
 Description=Backup with restic daily
 [Timer]
 OnCalendar=*-*-* 19:00:00
+OnStartupSec=5min
 Persistent=true
 [Install]
 WantedBy=timers.target
