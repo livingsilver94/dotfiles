@@ -10,5 +10,10 @@
         "editorBracketMatch.background": "#fffb00"
     },
     "workbench.colorTheme": "Default Light+",
-    "workbench.iconTheme": "vscode-icon-theme"
+    "python.linting.pylintArgs": [
+        "--enable=W0614"
+    ],
+    "files.exclude": {
+        "**/__pycache__": true
+    }
 }
