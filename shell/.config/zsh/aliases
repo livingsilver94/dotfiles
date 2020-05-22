@@ -3,8 +3,9 @@ antibody_edit() {
 	antibody bundle < "$XDG_CONFIG_HOME/zsh/zsh_plugins" > "$XDG_CONFIG_HOME/zsh/zsh_plugins.sh"
 }
 
-alias ls='ls --color=auto'
+alias diff='diff --color=auto -u'
 alias grep='grep --color=auto'
+alias ls='ls --color=auto'
 
 alias g='git'
 alias ga='git add'
