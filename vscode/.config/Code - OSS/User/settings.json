@@ -1,19 +1,22 @@
 {
     "editor.cursorSmoothCaretAnimation": true,
     "files.autoSave": "onFocusChange",
+    "files.exclude": {
+        "**/__pycache__": true
+    },
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
-    "workbench.colorCustomizations": {
-        "editorBracketMatch.background": "#fffb00"
-    },
-    "workbench.colorTheme": "Default Light+",
+    "go.useLanguageServer": true,
+    "python.linting.mypyEnabled": true,
     "python.linting.pylintArgs": [
         "--enable=W0614"
     ],
-    "files.exclude": {
-        "**/__pycache__": true
-    }
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "workbench.colorCustomizations": {
+        "editorBracketMatch.background": "#fffb00"
+    },
+    "workbench.colorTheme": "Default Light+"
 }
