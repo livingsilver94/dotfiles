@@ -1,5 +1,10 @@
 {
+    "C_Cpp.clang_format_fallbackStyle": "Chromium",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.cppStandard": "c++17",
+    "cmake.configureOnOpen": true,
     "editor.cursorSmoothCaretAnimation": true,
+    "editor.formatOnSave": true,
     "files.autoSave": "onFocusChange",
     "files.exclude": {
         "**/__pycache__": true
@@ -16,9 +21,6 @@
     "telemetry.enableTelemetry": false,
     "typescript.updateImportsOnFileMove.enabled": "always",
     "window.zoomLevel": 0,
-    "workbench.colorCustomizations": {
-        "editorBracketMatch.background": "#fffb00"
-    },
     "workbench.colorTheme": "Default Light+",
     "workbench.startupEditor": "newUntitledFile"
 }
