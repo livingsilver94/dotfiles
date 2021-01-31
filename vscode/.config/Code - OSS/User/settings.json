@@ -1,7 +1,8 @@
 {
-    "C_Cpp.clang_format_fallbackStyle": "Chromium",
-    "C_Cpp.default.cStandard": "c17",
-    "C_Cpp.default.cppStandard": "c++17",
+    "clangd.arguments": [
+        "-compile-commands-dir=build"
+    ],
+    "clangd.onConfigChanged": "restart",
     "cmake.configureOnOpen": true,
     "editor.cursorSmoothCaretAnimation": true,
     "editor.formatOnSave": true,
