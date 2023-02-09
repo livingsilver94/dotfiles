@@ -1,0 +1,5 @@
+pkgmanager: [dnf, install, -y]
+packages  :
+    - systemd
+links     :
+    00-base.conf: ${HOME}/.config/environment.d/00-base.conf
