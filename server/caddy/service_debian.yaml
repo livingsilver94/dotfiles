@@ -7,4 +7,3 @@ copies    :
 	Caddyfile : /etc/caddy/Caddyfile
 finalize  : |
 	mkdir /etc/caddy/{domain,subpath}
-	systemctl enable --now caddy.service
