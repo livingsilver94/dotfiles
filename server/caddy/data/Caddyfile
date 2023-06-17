@@ -1,0 +1,23 @@
+{
+	log {
+		output file /var/log/caddy/access.log
+	}
+}
+
+# Main domain.
+{{domain}} {
+	log
+	root * /var/www
+	file_server
+
+	import subpath/*
+
+	encode {
+		zstd
+		gzip
+		minimum_length 1024
+	}
+}
+
+# Other domains.
+import domain/*
