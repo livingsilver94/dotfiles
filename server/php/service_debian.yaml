@@ -1,0 +1,4 @@
+pkgmanager: [apt, install, -y]
+packages  :
+	- php-cli
+	- php-fpm
