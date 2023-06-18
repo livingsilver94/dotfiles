@@ -1,0 +1,30 @@
+map 1 {ncdir} {
+	default "nextcloud"
+}
+redir /.well-known/carddav /{ncdir}/remote.php/dav 301
+redir /.well-known/caldav /{ncdir}/remote.php/dav 301
+redir /.well-known/webfinger /{ncdir}/index.php{uri} 301
+redir /.well-known/nodeinfo /{ncdir}/index.php{uri} 301
+handle /{ncdir}* {
+	uri replace {ncdir}/index.php {ncdir}
+	php_fastcgi unix//run/php/php-fpm.sock {
+		try_files {path} {path}/index.php /{ncdir}/index.php index.php
+		env front_controller_active true
+		header_down -x-powered-by
+	}
+	@forbidden {
+		path /{ncdir}/AUTHORS
+		path /{ncdir}/.htaccess
+		path /{ncdir}/data/*
+		path /{ncdir}/config/*
+		path /{ncdir}/db_structure
+		path /{ncdir}/.xml
+		path /{ncdir}/README
+		path /{ncdir}/3rdparty/*
+		path /{ncdir}/lib/*
+		path /{ncdir}/templates/*
+		path /{ncdir}/occ
+		path /{ncdir}/console.php
+	}
+	redir @forbidden {dir}
+}
