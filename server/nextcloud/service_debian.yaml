@@ -27,4 +27,5 @@ copies    :
 	my.config.php : /srv/nextcloud/config/my.config.php
 finalize  : |
 	wget -qO - https://download.nextcloud.com/server/releases/latest.tar.bz2 | tar xj -C /srv
+	mysql < {{datadir}}/dbsetup.sql
 	systemctl enable --now nextcloudcron.timer
