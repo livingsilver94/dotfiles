@@ -1,0 +1,24 @@
+pkgmanager: [apt, install, -y]
+packages  :
+	- wireguard-tools
+copies    :
+  wg0.conf:
+    path : /etc/wireguard/wg0.conf
+    mode : 0o600
+finalize  : |
+  server_private_key=$(wg genkey)
+  server_public_key=$(echo $server_private_key | wg pubkey)
+
+  phoenix_private_key=$(wg genkey)
+  phoenix_public_key=$(echo $phoenix_private_key | wg pubkey)
+
+  sed -i \
+    -e "s|%SERVERPRIVATEKEY%|$server_private_key|" \
+    -e "s|%PHOENIXPUBKEY%|$phoenix_public_key|" \
+    /etc/wireguard/wg0.conf
+
+  echo "Server public key: $server_private_key" >&2
+  echo "Phoenix private key: $phoenix_private_key" >&2
+
+  wg-quick down wg0 || true
+  systemctl enable --now wg-quick@wg0.service
