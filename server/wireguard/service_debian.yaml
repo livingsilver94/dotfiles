@@ -1,3 +1,5 @@
+setup     : |
+  wg-quick down wg0 || true
 pkgmanager: [apt, install, -y]
 packages  :
 	- wireguard-tools
@@ -20,5 +22,4 @@ finalize  : |
   echo "Server public key: $server_private_key" >&2
   echo "Phoenix private key: $phoenix_private_key" >&2
 
-  wg-quick down wg0 || true
   systemctl enable --now wg-quick@wg0.service
