@@ -1,5 +1,5 @@
-pkgmanager: [dnf, install, -y]
+pkgmanager: [sudo, dnf, install, -y]
 packages  :
     - git
 links     :
-    config: ${XDG_CONFIG_HOME}/git/config
+    config: {{XDG_CONFIG_HOME}}/git/config

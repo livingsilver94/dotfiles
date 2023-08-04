@@ -1,16 +1,8 @@
-pkgmanager: [dnf, install, -y]
+pkgmanager: [sudo, dnf, install, -y]
 packages  :
     - corectrl
 copies    :
-    90-corectrl.rules  : /etc/polkit-1/rules.d/90-corectrl.rules
+    90-corectrl.rules : /etc/polkit-1/rules.d/90-corectrl.rules
 finalize  : |
-    if [ $USER == 'root' ]; then
-        if [ ! -z $SUDO_USER ]; then
-            sed "s|%ME%|$SUDO_USER|" -i /etc/polkit-1/rules.d/90-corectrl.rules
-        else
-            echo 'Remember to change user in /etc/polkit-1/rules.d/90-corectrl.rules' > /dev/stderr
-        fi
-    else
-        sed "s|%ME%|$USER|" -i /etc/polkit-1/rules.d/90-corectrl.rules
-    fi
-    grubby --args="amdgpu.ppfeaturemask=0xffffffff" --update-kernel=ALL
+    sudo sed 's|%ME%|{{USER}}|' -i /etc/polkit-1/rules.d/90-corectrl.rules
+    sudo grubby --args="amdgpu.ppfeaturemask=0xffffffff" --update-kernel=ALL

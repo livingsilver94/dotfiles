@@ -1,8 +1,8 @@
-pkgmanager: [dnf, install, -y]
+pkgmanager: [sudo, dnf, install, -y]
 packages  :
     - systemd
 links     :
-    00-base.conf: ${HOME}/.config/environment.d/00-base.conf
+    00-base.conf: {{HOME}}/.config/environment.d/00-base.conf
 finalize  : |
     sudo dnf install \
         https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \

@@ -1,21 +1,12 @@
-pkgmanager: [dnf, install, -y]
+pkgmanager: [sudo, dnf, install, -y]
 packages  :
     - git
     - zsh
 links     :
-    zsh  : ${XDG_CONFIG_HOME}/zsh
+    zsh  : {{XDG_CONFIG_HOME}}/zsh
 finalize  : |
-    git clone --depth=1 https://github.com/mattmc3/antidote.git $XDG_DATA_HOME/zsh/antidote
-    ln -s ${XDG_CONFIG_HOME}/zsh/zshenv ~/.zshenv
-    ln -s ${XDG_CONFIG_HOME}/zsh/zshrc  ~/.zshrc
+    git clone --depth=1 https://github.com/mattmc3/antidote.git {{XDG_DATA_HOME}}/zsh/antidote
+    ln -s {{XDG_CONFIG_HOME}}/zsh/zshenv ~/.zshenv
+    ln -s {{XDG_CONFIG_HOME}}/zsh/zshrc  ~/.zshrc
 
-    if [ $USER == 'root' ]; then
-        if [ ! -z $SUDO_USER ]; then
-            chsh -s $(which zsh) $SUDO_USER
-        else
-            echo 'Remember to change shell using chsh' > /dev/stderr
-        fi
-    else
-        chsh -s $(which zsh) $USER
-    fi
-
+    chsh -s $(which zsh) {{USER}}
