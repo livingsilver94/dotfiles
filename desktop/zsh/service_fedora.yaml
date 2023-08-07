@@ -2,8 +2,8 @@ pkgmanager: [sudo, dnf, install, -y]
 packages  :
     - git
     - zsh
-links     :
-    zsh  : {{XDG_CONFIG_HOME}}/zsh
+links:
+    zsh: "{{XDG_CONFIG_HOME}}/zsh"
 finalize  : |
     git clone --depth=1 https://github.com/mattmc3/antidote.git {{XDG_DATA_HOME}}/zsh/antidote
     ln -s {{XDG_CONFIG_HOME}}/zsh/zshenv ~/.zshenv

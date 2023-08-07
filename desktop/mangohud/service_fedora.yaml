@@ -2,4 +2,4 @@ pkgmanager: [sudo, dnf, install, -y]
 packages  :
     - mangohud
 links     :
-    MangoHud: {{XDG_CONFIG_HOME}}/MangoHud
+    MangoHud: "{{XDG_CONFIG_HOME}}/MangoHud"
