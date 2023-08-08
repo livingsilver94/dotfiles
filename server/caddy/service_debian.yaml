@@ -1,9 +1,9 @@
 pkgmanager: [apt, install, -y]
 packages  :
-	- caddy
+    - caddy
 variables :
-	domain : app.redaril.me
+    domain : app.redaril.me
 copies    :
-	Caddyfile : /etc/caddy/Caddyfile
+    Caddyfile : /etc/caddy/Caddyfile
 finalize  : |
-	mkdir /etc/caddy/{domain,subpath}
+    mkdir /etc/caddy/{domain,subpath}

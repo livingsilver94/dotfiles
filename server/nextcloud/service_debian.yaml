@@ -1,31 +1,31 @@
 depends   :
-	- caddy
-	- mariadb
-	- php
-	- redis
+    - caddy
+    - mariadb
+    - php
+    - redis
 pkgmanager: [apt, install, -y]
 packages  :
-	- php-apcu
-	- php-bcmath
-	- php-bz2
-	- php-curl
-	- php-gd
-	- php-gmp
-	- php-imagick
-	- php-intl
-	- php-mbstring
-	- php-mysql
-	- php-redis
-	- php-smbclient
-	- php-xml
-	- php-zip
+    - php-apcu
+    - php-bcmath
+    - php-bz2
+    - php-curl
+    - php-gd
+    - php-gmp
+    - php-imagick
+    - php-intl
+    - php-mbstring
+    - php-mysql
+    - php-redis
+    - php-smbclient
+    - php-xml
+    - php-zip
 links     :
-	nextcloud.caddy : /etc/caddy/subpath/nextcloud
-	nextcloudcron.service : /etc/systemd/system/nextcloudcron.service	
-	nextcloudcron.timer : /etc/systemd/system/nextcloudcron.timer
+    nextcloud.caddy : /etc/caddy/subpath/nextcloud
+    nextcloudcron.service : /etc/systemd/system/nextcloudcron.service
+    nextcloudcron.timer : /etc/systemd/system/nextcloudcron.timer
 copies    :
-	my.config.php : /srv/nextcloud/config/my.config.php
+    my.config.php : /srv/nextcloud/config/my.config.php
 finalize  : |
-	wget -qO - https://download.nextcloud.com/server/releases/latest.tar.bz2 | tar xj -C /srv
-	mysql < {{datadir}}/dbsetup.sql
-	systemctl enable --now nextcloudcron.timer
+    wget -qO - https://download.nextcloud.com/server/releases/latest.tar.bz2 | tar xj -C /srv
+    mysql < {{datadir}}/dbsetup.sql
+    systemctl enable --now nextcloudcron.timer

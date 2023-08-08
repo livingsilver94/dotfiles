@@ -1,3 +1,3 @@
 pkgmanager: [apt, install, -y]
 packages  :
-	- mariadb
+    - mariadb
