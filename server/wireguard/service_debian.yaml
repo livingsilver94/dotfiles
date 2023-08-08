@@ -3,6 +3,10 @@ setup     : |
 pkgmanager: [apt, install, -y]
 packages  :
 	- wireguard-tools
+variables :
+  subnet: "10.12.0.0/24"
+  serverIP: "10.12.0.1/24"
+  phoenixIP: "10.12.0.12/32"
 copies    :
   wg0.conf:
     path : /etc/wireguard/wg0.conf
