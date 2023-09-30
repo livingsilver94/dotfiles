@@ -4,11 +4,14 @@ pkgmanager: [apt, install, -y]
 packages  :
     - wireguard-tools
 variables :
-    subnet: "10.12.0.0/24"
-    serverIP: "10.12.0.1/24"
+    domain: "app.redaril.me"
+    lan: "192.168.3.0/24"
     phoenixIP: "10.12.0.12/32"
+    serverIP: "10.12.0.1/24"
+    subnet: "10.12.0.0/24"
 copies    :
-    wg0.conf:
+    phoenix.conf: "{{PWD}}/wg0.conf"
+    server.conf:
         path : /etc/wireguard/wg0.conf
         mode : 0o600
 finalize  : |
@@ -23,7 +26,11 @@ finalize  : |
         -e "s|%PHOENIXPUBKEY%|$phoenix_public_key|" \
         /etc/wireguard/wg0.conf
 
-    echo "Server public key: $server_private_key" >&2
-    echo "Phoenix private key: $phoenix_private_key" >&2
+    sed -i \
+        -e "s|%SERVERPUBKEY%|$server_public_key|" \
+        -e "s|%PHOENIXPRIVATEKEY%|$phoenix_private_key|" \
+        {{PWD}}/wg0.conf
+
+    echo "Use {{PWD}}/wg0.conf for Phoenix!" >&2
 
     systemctl enable --now wg-quick@wg0.service
