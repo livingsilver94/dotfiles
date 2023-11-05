@@ -3,8 +3,7 @@ polkit.addRule(function(action, subject) {
          action.id == "org.corectrl.helperkiller.init") &&
         subject.local == true &&
         subject.active == true &&
-        subject.user == "%ME%") {
+        subject.user == "{{USER}}") {
             return polkit.Result.YES;
     }
 });
-
