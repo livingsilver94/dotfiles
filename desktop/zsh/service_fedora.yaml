@@ -9,4 +9,4 @@ finalize  : |
     ln -s {{XDG_CONFIG_HOME}}/zsh/zshenv ~/.zshenv
     ln -s {{XDG_CONFIG_HOME}}/zsh/zshrc  ~/.zshrc
 
-    chsh -s $(which zsh) {{USER}}
+    sudo chsh -s $(which zsh) {{USER}}
