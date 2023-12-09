@@ -1,6 +1,7 @@
 [user]
 	name = Fabio Forni
 	email = development@redaril.me
+	signingkey = 81C2729AADA16A67
 [init]
 	defaultBranch = main
 [push]
