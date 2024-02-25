@@ -6,3 +6,6 @@
 	defaultBranch = main
 [push]
 	autoSetupRemote = true
+[alias]
+	cm = commit -m
+	s = status
