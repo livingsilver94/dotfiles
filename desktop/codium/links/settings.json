@@ -1,0 +1,23 @@
+{
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "dev.containers.dockerPath": "podman",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "extensions.ignoreRecommendations": true,
+    "files.autoSave": "onFocusChange",
+    "files.insertFinalNewline": true,
+    "files.readonlyInclude": {
+        "**/.cargo/registry/src/**/*.rs": true,
+        "**/lib/rustlib/src/rust/library/**/*.rs": true,
+    },
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "go.toolsManagement.autoUpdate": true,
+    "lldb.suppressUpdateNotifications": true,
+    "rust-analyzer.check.command": "clippy",
+    "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
+    "rust-analyzer.imports.prefix": "crate",
+    "workbench.colorTheme": "Default Light+",
+    "workbench.startupEditor": "none",
+}
