@@ -20,4 +20,5 @@
     "rust-analyzer.imports.prefix": "crate",
     "workbench.colorTheme": "Default Light+",
     "workbench.startupEditor": "none",
+    "mesonbuild.downloadLanguageServer": true,
 }

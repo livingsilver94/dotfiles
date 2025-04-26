@@ -26,3 +26,6 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^[[F' end-of-line       # End.
 bindkey '^[[H' beginning-of-line # Home.
+
+path+=("$CARGO_HOME/bin")
+path+=("$GOPATH/bin")
