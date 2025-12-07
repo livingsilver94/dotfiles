@@ -1,0 +1,2 @@
+CREATE USER mealie WITH PASSWORD 'mealie';
+CREATE DATABASE mealie OWNER mealie;

@@ -1,0 +1,8 @@
+[Unit]
+Description=Home Assistant data volume
+
+[Volume]
+VolumeName=homeassistant-data
+
+[Install]
+WantedBy=default.target

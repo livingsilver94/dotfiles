@@ -1,0 +1,13 @@
+authelia.{$MY_DOMAIN} {
+	import common
+	# Authelia doesn't understand "select_account" from oCIS.
+	uri /api/oidc/authorization replace &prompt=select_account%20consent ""
+	reverse_proxy authelia:9091
+}
+
+https://authelia.{$MY_DOMAIN} {
+	bind 0.0.0.0 [::1] {
+		protocols h1 h2
+	}
+	reverse_proxy authelia:9091
+}

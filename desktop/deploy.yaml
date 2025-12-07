@@ -1,0 +1,36 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: "Create environment.d directory"
+      ansible.builtin.file:
+        path: "{{ lookup('env', 'HOME') }}/.config/environment.d"
+        state: directory
+    - name: "Set global environment variables"
+      ansible.builtin.file:
+        src: "{{ playbook_dir }}/env.conf"
+        dest: "{{ lookup('env', 'HOME') }}/.config/environment.d/00-env.conf"
+        state: link
+      register: envvars
+    - name: "Require reboot upon new environment variables"
+      ansible.builtin.fail:
+        msg: "Please now reboot and then re-run the installation procedure"
+      when: envvars.changed
+
+    - name: "Install packages without specific configuration"
+      ansible.builtin.package:
+        name:
+          - clang-tools-extra
+          - keepassxc
+          - nano
+          - nextcloud-client-nautilus
+          - ptyxis
+          - ripgrep
+          - tealdeer
+      become: true
+
+    - name: "Install Git"
+      ansible.builtin.import_tasks: "git/deploy.yaml"
+
+    - name: "Install ZSH"
+      ansible.builtin.import_tasks: "zsh/deploy.yaml"

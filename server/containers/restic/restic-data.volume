@@ -1,0 +1,8 @@
+[Unit]
+Description=Restic data volume
+
+[Volume]
+VolumeName=restic-data
+
+[Install]
+WantedBy=default.target

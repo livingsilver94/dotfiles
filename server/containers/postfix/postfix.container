@@ -1,0 +1,21 @@
+[Unit]
+Description=Postfix
+
+[Container]
+Image=docker.io/boky/postfix:latest-alpine
+ContainerName=postfix
+
+AutoUpdate=registry
+Environment=ALLOWED_SENDER_DOMAINS={{ MY_DOMAIN }}
+Environment=RELAYHOST_PASSWORD_FILE=/run/secrets/POSTFIX_RELAYHOST_PASSWORD
+Environment=RELAYHOST_USERNAME=app@app.redaril.me
+Environment=RELAYHOST=smtp.eu.mailgun.org
+Network=email.network
+Network=internet.network
+Secret=POSTFIX_RELAYHOST_PASSWORD
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

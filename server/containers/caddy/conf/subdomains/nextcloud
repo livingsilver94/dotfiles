@@ -1,0 +1,9 @@
+nextcloud.{$MY_DOMAIN} {
+	import common
+	header_up Strict-Transport-Security max-age=15552000
+	reverse_proxy nextcloud:80 {
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+}

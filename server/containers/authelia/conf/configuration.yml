@@ -1,0 +1,139 @@
+access_control:
+  default_policy: "deny"
+  rules:
+    - domain: '{{env "MY_DOMAIN"}}'
+      policy: "one_factor"
+    - domain: '*.{{env "MY_DOMAIN"}}'
+      policy: "one_factor"
+
+authentication_backend:
+  ldap:
+    address: "ldap://lldap:3890"
+    implementation: "lldap"
+    base_dn: '{{env "MY_BASE_DN"}}'
+    user: 'uid=authelia,ou=people,{{env "MY_BASE_DN"}}'
+
+server:
+  endpoints:
+    authz:
+      forward-auth:
+        implementation: 'ForwardAuth'
+        authn_strategies:
+          - name: 'HeaderAuthorization'
+            schemes:
+              - 'Basic'
+            scheme_basic_cache_lifespan: 0
+          - name: 'CookieSession'
+
+definitions:
+  user_attributes:
+    is_nextcloud_admin:
+      # Users belonging to this group are admins in Nextcloud.
+      expression: '"admins" in groups'
+
+identity_providers:
+  oidc:
+    jwks:
+      - key: {{secret "/run/secrets/AUTHELIA_OIDC_PRIVATE_KEY" | mindent 10 "|" | msquote}}
+    lifespans:
+      access_token: "30d"
+      refresh_token: "30d"
+    cors:
+      endpoints:
+        - "authorization"
+        - "token"
+        - "revocation"
+        - "introspection"
+        - "userinfo"
+    claims_policies:
+      default:
+        id_token: ["groups", "email", "email_verified", "alt_emails", "preferred_username", "name"]
+      nextcloud_userinfo:
+        custom_claims:
+          is_nextcloud_admin: {}
+    scopes:
+      nextcloud_userinfo:
+        claims:
+          - "is_nextcloud_admin"
+    clients:
+      - client_id: "jellyfin"
+        client_name: "Jellyfin"
+        client_secret: "$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng" # The digest of 'insecure_secret'.
+        public: false
+        authorization_policy: "one_factor"
+        require_pkce: true
+        pkce_challenge_method: "S256"
+        redirect_uris:
+          - 'https://jellyfin.{{env "MY_DOMAIN"}}/sso/OID/redirect/authelia'
+        scopes:
+          - "openid"
+          - "profile"
+          - "groups"
+        userinfo_signed_response_alg: "none"
+        token_endpoint_auth_method: "client_secret_post"
+        consent_mode: "implicit"
+
+      - client_id: "mealie"
+        client_name: "Mealie"
+        client_secret: '{{secret "/run/secrets/MEALIE_CLIENT_SECRET"}}'
+        claims_policy: "default"
+        authorization_policy: "one_factor"
+        require_pkce: true
+        pkce_challenge_method: "S256"
+        redirect_uris:
+          - 'https://mealie.{{env "MY_DOMAIN"}}/login'
+        scopes:
+          - "email"
+          - "groups"
+          - "openid"
+          - "profile"
+        userinfo_signed_response_alg: "none"
+        token_endpoint_auth_method: "client_secret_basic"
+
+      - client_id: "nextcloud"
+        client_name: "NextCloud"
+        client_secret: '{{secret "/run/secrets/NEXTCLOUD_CLIENT_SECRET"}}'
+        public: false
+        authorization_policy: "one_factor"
+        require_pkce: true
+        pkce_challenge_method: "S256"
+        claims_policy: "nextcloud_userinfo"
+        redirect_uris:
+          - 'https://nextcloud.{{env "MY_DOMAIN"}}/apps/oidc_login/oidc'
+        scopes:
+          - "openid"
+          - "profile"
+          - "email"
+          - "groups"
+          - "nextcloud_userinfo"
+        response_types:
+          - "code"
+        grant_types:
+          - "authorization_code"
+        access_token_signed_response_alg: "none"
+        userinfo_signed_response_alg: "none"
+        token_endpoint_auth_method: "client_secret_basic"
+
+notifier:
+  smtp:
+    address: "smtp://postfix:587"
+    sender: 'Authelia <authelia@{{env "MY_DOMAIN"}}>'
+    disable_require_tls: true
+
+session:
+  cookies:
+    - domain: '{{env "MY_DOMAIN"}}'
+      authelia_url: 'https://authelia.{{env "MY_DOMAIN"}}'
+      default_redirection_url: 'https://{{env "MY_DOMAIN"}}'
+  expiration: 1y
+  inactivity: 1M
+  redis:
+    host: valkey
+  secret: '{{secret "/run/secrets/AUTHELIA_SESSION_SECRET"}}'
+
+storage:
+  postgres:
+    address: "tcp://postgresql:5432"
+    database: "authelia"
+    username: "authelia"
+    password: "authelia"

@@ -1,0 +1,4 @@
+mealie.{$MY_DOMAIN} {
+	import common
+	reverse_proxy mealie:9000
+}

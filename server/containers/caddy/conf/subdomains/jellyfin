@@ -1,0 +1,4 @@
+jellyfin.{$MY_DOMAIN} {
+	import common
+	reverse_proxy jellyfin:8096
+}

@@ -1,0 +1,2 @@
+CREATE USER lldap WITH PASSWORD 'lldap';
+CREATE DATABASE lldap OWNER lldap;

@@ -1,0 +1,11 @@
+[Socket]
+BindIPv6Only=both
+# HTTP passes through fd 3.
+ListenStream=[::]:8080
+# HTTPS passes through fd 4.
+ListenStream=[::]:8443
+# HTTP/3 passes through fd 5.
+ListenDatagram=[::]:8443
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,101 @@
+---
+- become: true
+  become_user: root
+  block:
+    - name: Install packages
+      ansible.builtin.apt:
+        pkg:
+          - podman
+          - ufw
+
+    - name: "Create {{ containers_user }} user"
+      ansible.builtin.user:
+        name: "{{ containers_user }}"
+        create_home: true
+        groups:
+          - "dialout" # For the Zigbee Hub, that is a serial device.
+        home: "{{ containers_home }}"
+        shell: /sbin/nologin
+        system: true
+
+    - name: "Add subuid and subgid to {{ containers_user }} user"
+      ansible.builtin.command: "usermod --add-subuids 200000-265535 --add-subgids 200000-265535 {{ containers_user }}"
+
+    - name: "Set permissions to {{ containers_user }} home directory"
+      ansible.builtin.file:
+        group: root
+        mode: "750"
+        owner: "{{ containers_user }}"
+        path: "{{ containers_home }}"
+
+    - name: "Enable linger for {{ containers_user }} user"
+      ansible.builtin.command: "loginctl enable-linger {{ containers_user }}"
+
+    - name: "Redirect HTTP and HTTPS ports to unprivileged ports"
+      ansible.builtin.blockinfile:
+        path: /etc/ufw/before.rules
+        insertbefore: BOF
+        block: |
+          *nat
+          :PREROUTING ACCEPT [0:0]
+          -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+          -A PREROUTING -p udp --dport 443 -j REDIRECT --to-port 8443
+          -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443
+          COMMIT
+        append_newline: true
+        backup: true
+        validate: "iptables-restore --test %s"
+
+    - name: "Set allowed IP ports"
+      community.general.ufw:
+        default: deny
+        port: "{{ item }}"
+        rule: allow
+        state: enabled
+      loop:
+        - ssh # Keep it above otherwise we get closed out!
+        - "8080 proto tcp"
+        - "8443"
+
+- become: true
+  become_user: containers
+  block:
+    - name: Create destination directory
+      ansible.builtin.file:
+        path: "{{ quadlet_dir }}"
+        state: directory
+
+    - name: Install common Quadlets
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: "{{ quadlet_dir }}/{{ item | basename }}"
+      with_fileglob:
+        - "*.network"
+        - "*.volume"
+
+    - name: Install Authelia
+      ansible.builtin.import_tasks: authelia/deploy.yaml
+    - name: Install Caddy
+      ansible.builtin.import_tasks: caddy/deploy.yaml
+    - name: Install Cloudflare DDNS
+      ansible.builtin.import_tasks: cloudflare-ddns/deploy.yaml
+    - name: Install Home Assistant
+      ansible.builtin.import_tasks: homeassistant/deploy.yaml
+    - name: Install LLDAP
+      ansible.builtin.import_tasks: lldap/deploy.yaml
+    - name: Install Nextcloud
+      ansible.builtin.import_tasks: nextcloud/deploy.yaml
+    - name: Install Mealie
+      ansible.builtin.import_tasks: mealie/deploy.yaml
+    - name: Install Postfix
+      ansible.builtin.import_tasks: postfix/deploy.yaml
+    - name: Install PostgreSQL
+      ansible.builtin.import_tasks: postgresql/deploy.yaml
+    - name: Install Restic
+      ansible.builtin.import_tasks: restic/deploy.yaml
+    - name: Install Valkey
+      ansible.builtin.import_tasks: valkey/deploy.yaml
+    - name: Reload systemd units
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+        scope: user

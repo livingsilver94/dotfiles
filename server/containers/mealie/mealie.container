@@ -1,0 +1,39 @@
+[Unit]
+Description=Mealie recipe manager
+Wants=postgresql.container
+Requires=postgresql.container
+
+[Container]
+Image=ghcr.io/mealie-recipes/mealie:latest
+ContainerName=mealie
+
+AutoUpdate=registry
+Environment=ALLOW_SIGNUP="false"
+Environment=BASE_URL="https://mealie.{{ MY_DOMAIN }}"
+Environment=DB_ENGINE="postgres"
+Environment=OIDC_ADMIN_GROUP="admins"
+Environment=OIDC_AUTH_ENABLED="true"
+Environment=OIDC_AUTO_REDIRECT="true"
+Environment=OIDC_CLIENT_ID="mealie"
+Environment=OIDC_CLIENT_SECRET_FILE="/run/secrets/MEALIE_CLIENT_SECRET"
+Environment=OIDC_CONFIGURATION_URL="https://authelia.{{ MY_DOMAIN }}/.well-known/openid-configuration"
+Environment=OIDC_SIGNUP_ENABLED="true"
+Environment=OIDC_USER_GROUP="mealie-users"
+Environment=POSTGRES_DB="mealie"
+Environment=POSTGRES_PASSWORD="mealie"
+Environment=POSTGRES_SERVER="postgresql"
+Environment=POSTGRES_USER="mealie"
+Environment=SMTP_AUTH_STRATEGY=NONE
+Environment=SMTP_FROM_EMAIL=mealie@{{ MY_DOMAIN }}
+Environment=SMTP_HOST=postfix
+Network=database.network
+Network=email.network
+Network=webserver.network
+Secret=MEALIE_CLIENT_SECRET
+Volume=mealie-data.volume:/app/data:Z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,17 @@
+---
+- hosts: appserver
+  vars:
+    MY_BASE_DN: "dc=app,dc=redaril,dc=me"
+    MY_DOMAIN: "app.redaril.me"
+    MY_EMAIL: "fabio@redaril.me"
+    MY_INITIAL_PASSWORD: password
+    MY_USERNAME: livingsilver94
+    containers_user: "containers"
+    containers_home: "/var/lib/{{ containers_user }}"
+    quadlet_dir: "{{ containers_home }}/.config/containers/systemd"
+    backups_dir: "/media/data/backup"
+  tasks:
+    - name: "Install containers"
+      ansible.builtin.import_tasks: "containers/deploy.yaml"
+    - name: "Install backup service"
+      ansible.builtin.import_tasks: backup/deploy.yaml

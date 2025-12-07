@@ -1,0 +1,18 @@
+---
+- name: Create Authelia secrets
+  containers.podman.podman_secret:
+    name: "AUTHELIA_{{ item | basename }}"
+    data: "{{ lookup('file', '{{ item }}') }}"
+    skip_existing: true
+  with_fileglob:
+    - "secret/*"
+
+- name: Copy Authelia config
+  ansible.builtin.copy:
+    src: conf/
+    dest: "{{ quadlet_dir }}/authelia/"
+
+- name: Copy Authelia Quadlet
+  ansible.builtin.template:
+    src: authelia.container
+    dest: "{{ quadlet_dir }}/authelia.container"

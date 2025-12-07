@@ -1,0 +1,22 @@
+[Unit]
+Description=Home Assistant
+
+[Container]
+Image=ghcr.io/home-assistant/home-assistant:stable
+ContainerName=homeassistant
+
+AddDevice=/dev/ttyUSB0:/dev/ttyUSB0
+AutoUpdate=registry
+GroupAdd=keep-groups
+Network=internet.network
+Network=webserver.network
+Volume=/etc/localtime:/etc/localtime:ro
+Volume=/run/dbus:/run/dbus:ro,z
+Volume=homeassistant-data.volume:/config:z
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=900
+
+[Install]
+WantedBy=default.target

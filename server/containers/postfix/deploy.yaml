@@ -1,0 +1,21 @@
+---
+- name: Create Postfix secrets
+  containers.podman.podman_secret:
+    name: "POSTFIX_{{ item | basename }}"
+    data: "{{ lookup('file', '{{ item }}') }}"
+    skip_existing: true
+  with_fileglob:
+    - "secret/*"
+
+# - name: Copy Postfix config
+#   ansible.builtin.copy:
+#     src: conf/
+#     dest: "{{ quadlet_dir }}/postfix/"
+
+- name: Copy Postfix Quadlet
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ quadlet_dir }}/{{ item | basename }}"
+  with_fileglob:
+    - "*.container"
+    - "*.volume"

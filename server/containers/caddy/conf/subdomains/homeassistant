@@ -1,0 +1,4 @@
+ha.{$MY_DOMAIN} {
+	import common
+	reverse_proxy homeassistant:8123
+}

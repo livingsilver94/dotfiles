@@ -1,0 +1,28 @@
+[Unit]
+Description=Light LDAP
+After=postfix.container postgresql.container valkey.container
+Requires=postfix.container postgresql.container valkey.container
+
+[Container]
+Image=docker.io/lldap/lldap:latest-alpine-rootless
+ContainerName=lldap
+
+AutoUpdate=registry
+Environment=LLDAP_DATABASE_URL="postgres://lldap:lldap@postgresql/lldap"
+Environment=LLDAP_JWT_SECRET_FILE=/run/secrets/LLDAP_JWT_SECRET
+Environment=LLDAP_KEY_SEED_FILE=/run/secrets/LLDAP_KEY_SEED
+Environment=LLDAP_LDAP_BASE_DN="{{ MY_BASE_DN }}"
+Environment=LLDAP_LDAP_USER_DN="{{ MY_USERNAME }}"
+Environment=LLDAP_LDAP_USER_EMAIL={{ MY_EMAIL }}
+Environment=LLDAP_LDAP_USER_PASS={{ MY_INITIAL_PASSWORD }}
+Network=authentication.network
+Network=database.network
+Network=webserver.network
+Secret=LLDAP_JWT_SECRET
+Secret=LLDAP_KEY_SEED
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

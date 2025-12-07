@@ -1,0 +1,6 @@
+restic.{$MY_DOMAIN} {
+	import auth_required
+	reverse_proxy restic:8000 {
+		header_up Remote-User {http.request.header.Remote-User}
+	}
+}

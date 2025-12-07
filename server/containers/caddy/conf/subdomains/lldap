@@ -1,0 +1,4 @@
+lldap.{$MY_DOMAIN} {
+	import common
+	reverse_proxy lldap:17170
+}

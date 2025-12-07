@@ -1,0 +1,20 @@
+---
+- name: Copy Caddy config
+  ansible.builtin.copy:
+    src: conf/
+    dest: "{{ quadlet_dir }}/caddy/"
+
+- name: Copy Caddy Quadlet
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ quadlet_dir }}/{{ item | basename }}"
+  with_fileglob:
+    - "*.container"
+    - "*.volume"
+
+- name: Copy Caddy socket
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ containers_home }}/.config/systemd/user/"
+  with_fileglob:
+    - "*.socket"

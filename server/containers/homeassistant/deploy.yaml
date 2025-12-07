@@ -1,0 +1,8 @@
+---
+- name: Copy Home Assistant Quadlet
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ quadlet_dir }}/{{ item | basename }}"
+  with_fileglob:
+    - "*.container"
+    - "*.volume"

@@ -1,0 +1,12 @@
+---
+- name: "Install Git"
+  ansible.builtin.package:
+    name:
+      - git
+  become: true
+
+- name: "Configure Git"
+  ansible.builtin.file:
+    src: "{{ ansible_search_path[0] }}/conf"
+    dest: "{{ lookup('env', 'XDG_CONFIG_HOME') }}/git"
+    state: link

@@ -1,0 +1,22 @@
+[Unit]
+Description=Restic REST server
+After=authelia.container caddy.container
+Requires=authelia.container caddy.container
+
+[Container]
+Image=docker.io/restic/rest-server:latest
+ContainerName=restic
+
+AutoUpdate=registry
+Environment=OPTIONS="--proxy-auth-username Remote-User"
+Environment=PASSWORD_FILE=/dev/null
+Network=webserver.network
+NoNewPrivileges=true
+ReadOnly=true
+Volume={{ backups_dir }}:/data:z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

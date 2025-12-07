@@ -1,0 +1,5 @@
+ocis.{$MY_DOMAIN} {
+	import common
+	header >Content-Security-Policy "connect-src 'self'" "connect-src 'self' authelia.{$MY_DOMAIN}"
+	reverse_proxy ocis:9200
+}

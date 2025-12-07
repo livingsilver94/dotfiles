@@ -1,0 +1,41 @@
+---
+- become: true
+  block:
+    - name: Install dependencies of the backup service
+      ansible.builtin.apt:
+        pkg:
+          - libtss2-esys-3.0.2-0t64
+          - libtss2-mu-4.0.1-0t64
+          - libtss2-rc0t64
+          - restic
+
+    - name: Encrypt repository password for backup
+      community.general.systemd_creds_encrypt:
+        name: appserver_backup_repository
+        secret: "{{ lookup('file', 'secret/appserver_backup_repository') }}"
+      register: appserver_backup_repository
+
+    - name: Create directory for systemd credentials
+      ansible.builtin.file:
+        path: "/etc/systemd/credentials"
+        state: directory
+
+    - name: Save encrypted repository password for backup
+      ansible.builtin.copy:
+        content: "{{ appserver_backup_repository.value }}"
+        dest: "/etc/systemd/credentials/appserver_backup_repository"
+
+    - name: Copy systemd units for backup
+      ansible.builtin.template:
+        src: "{{ item }}"
+        dest: "/etc/systemd/system/"
+      with_fileglob:
+        - "*.service"
+        - "*.timer"
+
+    - name: Enable backup timer
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+        enabled: true
+        name: backup.timer
+        state: started

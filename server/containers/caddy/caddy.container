@@ -1,0 +1,23 @@
+[Unit]
+Description=Caddy web server
+
+[Container]
+Image=docker.io/caddy:alpine
+ContainerName=caddy
+
+AutoUpdate=registry
+Environment=MY_DOMAIN={{ MY_DOMAIN }}
+Network=authentication.network
+Network=internet.network
+Network=webserver.network
+NetworkAlias=authelia.{{ MY_DOMAIN }}
+Notify=true
+User=root
+Volume=./caddy:/etc/caddy:ro,Z
+Volume=caddy-data.volume:/data:Z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

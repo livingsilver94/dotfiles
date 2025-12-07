@@ -1,0 +1,23 @@
+[Unit]
+Description=Cloudflare DDNS updater
+
+[Container]
+Image=docker.io/favonia/cloudflare-ddns:latest
+ContainerName=cloudflare-ddns
+
+AutoUpdate=registry
+DropCapability=all
+Environment=CLOUDFLARE_API_TOKEN_FILE=/run/secrets/CLOUDFLARE_DDNS_TOKEN
+Environment=DETECTION_TIMEOUT=5s
+Environment=DOMAINS="*.{{ MY_DOMAIN }},{{ MY_DOMAIN }}"
+# Wether to use Cloudflare proxy feature.
+Environment=PROXIED="true"
+Network=host
+NoNewPrivileges=true
+Secret=CLOUDFLARE_DDNS_TOKEN
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

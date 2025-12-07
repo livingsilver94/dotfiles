@@ -1,0 +1,22 @@
+---
+- name: Create Nextcloud secrets
+  containers.podman.podman_secret:
+    name: "NEXTCLOUD_{{ item | basename }}"
+    data: "{{ lookup('file', '{{ item }}') }}"
+    skip_existing: true
+  with_fileglob:
+    - "secret/*"
+
+- name: Copy Nextcloud config
+  ansible.builtin.copy:
+    src: conf/
+    dest: "{{ quadlet_dir }}/nextcloud/"
+    mode: preserve
+
+- name: Copy Nextcloud Quadlet
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ quadlet_dir }}/{{ item | basename }}"
+  with_fileglob:
+    - "*.container"
+    - "*.volume"

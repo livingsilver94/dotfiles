@@ -1,0 +1,38 @@
+[Unit]
+Description=Nextcloud
+After=postgresql.container valkey.container
+Requires=postgresql.container
+Wants=valkey.container
+
+[Container]
+Image=docker.io/nextcloud:apache
+ContainerName=nextcloud
+
+AutoUpdate=registry
+Environment=MAIL_DOMAIN={{ MY_DOMAIN }}
+Environment=MAIL_FROM_ADDRESS=nextcloud
+Environment=MY_DOMAIN={{ MY_DOMAIN }}
+Environment=NEXTCLOUD_ADMIN_PASSWORD={{ MY_INITIAL_PASSWORD }}
+Environment=NEXTCLOUD_ADMIN_USER={{ MY_USERNAME }}
+Environment=NEXTCLOUD_TRUSTED_DOMAINS="nextcloud.{{ MY_DOMAIN }}"
+Environment=POSTGRES_DB=nextcloud
+Environment=POSTGRES_HOST=postgresql
+Environment=POSTGRES_PASSWORD=nextcloud
+Environment=POSTGRES_USER=nextcloud
+Environment=REDIS_HOST=valkey
+Environment=SMTP_AUTHTYPE=plain
+Environment=SMTP_HOST=postfix
+Network=database.network
+Network=email.network
+Network=internet.network
+Network=webserver.network
+Secret=NEXTCLOUD_CLIENT_SECRET
+User=root
+Volume=./nextcloud/before-starting:/docker-entrypoint-hooks.d/before-starting:ro,z
+Volume=nextcloud-data.volume:/var/www/html:z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

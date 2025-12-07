@@ -1,0 +1,25 @@
+[Unit]
+Description=Backup container volumes using Restic
+
+[Service]
+Type=oneshot
+
+Environment=RESTIC_REPOSITORY={{ backups_dir }}/appserver
+Environment=RESTIC_PASSWORD_FILE=%d/appserver_backup_repository
+
+# Create a snapshot of Podman volumes.
+ExecStartPre=/usr/bin/cp \
+    --recursive \
+    --reflink \
+    {{ containers_home }}/.local/share/containers/storage/volumes \
+    {{ containers_home }}/.local/share/containers/storage/container_volumes/
+# Init the Restic repository, and ignore errors if it already exists.
+ExecStartPre=-/usr/bin/restic init
+ExecStart=/bin/sh -c 'restic backup {{ containers_home }}/.local/share/containers/storage/container_volumes/*-data'
+# Remove the snapshot under any circumstance.
+ExecStopPost=-/usr/bin/rm -rf {{ containers_home }}/.local/share/containers/storage/container_volumes
+
+LoadCredentialEncrypted=appserver_backup_repository:/etc/systemd/credentials/appserver_backup_repository
+
+[Install]
+WantedBy=multi-user.target

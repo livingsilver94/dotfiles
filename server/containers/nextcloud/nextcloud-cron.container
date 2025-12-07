@@ -1,0 +1,27 @@
+[Unit]
+Description=Nextcloud cron job
+After=postgresql.container valkey.container
+Requires=postgresql.container
+Wants=valkey.container
+
+[Container]
+Image=docker.io/nextcloud:apache
+ContainerName=nextcloud-cron
+
+AutoUpdate=registry
+Entrypoint=/cron.sh
+Environment=POSTGRES_DB=nextcloud
+Environment=POSTGRES_HOST=postgresql
+Environment=POSTGRES_PASSWORD=nextcloud
+Environment=POSTGRES_USER=nextcloud
+Environment=REDIS_HOST=valkey
+Network=database.network
+Secret=NEXTCLOUD_CLIENT_SECRET
+User=root
+Volume=nextcloud-data.volume:/var/www/html:z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

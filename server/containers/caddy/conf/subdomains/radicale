@@ -1,0 +1,5 @@
+radicale.{$MY_DOMAIN} {
+	import common
+	import auth_required
+	reverse_proxy radicale:5232
+}
