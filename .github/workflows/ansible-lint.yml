@@ -1,19 +1,27 @@
+---
 name: ansible-lint
-on:
+"on":
   pull_request:
     branches:
       - main
   push:
     branches:
       - main
+
 jobs:
-  build:
-    name: Ansible Lint
-    runs-on: ubuntu-24.04
+  lint:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v6.0.1
+
       - name: Run ansible-lint
         uses: ansible/ansible-lint@v25.12.0
         with:
-          args: "desktop/deploy.yaml server/deploy.yaml"
-          requirements_file: "requirements.yaml"
+          args: desktop/deploy.yaml server/deploy.yaml
+          requirements_file: requirements.yaml
+
+      - name: Run yamllint
+        uses: karancode/yamllint-github-action@v3.0.0
+        with:
+          yamllint_file_or_dir: .
