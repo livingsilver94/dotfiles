@@ -9,6 +9,7 @@
   ansible.builtin.git:
     repo: https://github.com/mattmc3/antidote.git
     dest: "{{ lookup('env', 'XDG_DATA_HOME') }}/zsh/antidote"
+    version: HEAD # noqa: latest
 
 - name: "Configure ZSH"
   block:
@@ -30,7 +31,6 @@
 
 - name: "Set ZSH as the default shell"
   ansible.builtin.user:
-    name: "{{ lookup('env', 'USER')  }}"
+    name: "{{ lookup('env', 'USER') }}"
     shell: /usr/bin/zsh
   become: true
-  
