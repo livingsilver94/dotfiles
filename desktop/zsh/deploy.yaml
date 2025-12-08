@@ -9,7 +9,7 @@
   ansible.builtin.git:
     repo: https://github.com/mattmc3/antidote.git
     dest: "{{ lookup('env', 'XDG_DATA_HOME') }}/zsh/antidote"
-    version: HEAD # noqa: latest
+    version: HEAD  # noqa: latest
 
 - name: "Configure ZSH"
   block:
