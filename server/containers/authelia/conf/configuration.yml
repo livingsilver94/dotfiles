@@ -1,3 +1,4 @@
+---
 access_control:
   default_policy: "deny"
   rules:
@@ -58,7 +59,8 @@ identity_providers:
     clients:
       - client_id: "jellyfin"
         client_name: "Jellyfin"
-        client_secret: "$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng" # The digest of 'insecure_secret'.
+        # The digest of 'insecure_secret'.
+        client_secret: "$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng"
         public: false
         authorization_policy: "one_factor"
         require_pkce: true

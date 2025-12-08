@@ -14,7 +14,7 @@
         name: "{{ containers_user }}"
         create_home: true
         groups:
-          - "dialout" # For the Zigbee Hub, that is a serial device.
+          - "dialout"  # For the Zigbee Hub, that is a serial device.
         home: "{{ containers_home }}"
         shell: /sbin/nologin
         system: true
@@ -57,7 +57,7 @@
         rule: allow
         state: enabled
       loop:
-        - ssh # Keep it above otherwise we get closed out!
+        - ssh  # Keep it above otherwise we get closed out!
         - "8080 proto tcp"
         - "8443"
 
