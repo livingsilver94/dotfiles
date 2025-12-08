@@ -14,8 +14,8 @@ Environment=AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/AUTHELIA_STORAGE_E
 # Environment variables are more convenient to configure services,
 # unfortunately not every configuration entry has the equivalent env var in Authelia.
 # For now, we have to rely on configuration.yml.
-Environment=MY_BASE_DN={{ MY_BASE_DN }}
-Environment=MY_DOMAIN={{ MY_DOMAIN }}
+Environment=MY_BASE_DN={{ my_base_dn }}
+Environment=MY_DOMAIN={{ my_domain }}
 Environment=X_AUTHELIA_CONFIG_FILTERS=template
 Network=authentication.network
 Network=database.network

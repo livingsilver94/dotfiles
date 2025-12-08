@@ -9,7 +9,7 @@ AutoUpdate=registry
 DropCapability=all
 Environment=CLOUDFLARE_API_TOKEN_FILE=/run/secrets/CLOUDFLARE_DDNS_TOKEN
 Environment=DETECTION_TIMEOUT=5s
-Environment=DOMAINS="*.{{ MY_DOMAIN }},{{ MY_DOMAIN }}"
+Environment=DOMAINS="*.{{ my_domain }},{{ my_domain }}"
 # Wether to use Cloudflare proxy feature.
 Environment=PROXIED="true"
 Network=host

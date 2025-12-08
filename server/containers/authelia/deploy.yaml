@@ -9,10 +9,12 @@
 
 - name: Copy Authelia config
   ansible.builtin.copy:
+    mode: preserve
     src: conf/
     dest: "{{ quadlet_dir }}/authelia/"
 
 - name: Copy Authelia Quadlet
   ansible.builtin.template:
+    mode: preserve
     src: authelia.container
     dest: "{{ quadlet_dir }}/authelia.container"

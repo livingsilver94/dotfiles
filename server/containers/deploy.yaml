@@ -1,5 +1,6 @@
 ---
-- become: true
+- name: Root operations
+  become: true
   become_user: root
   block:
     - name: Install packages
@@ -8,7 +9,7 @@
           - podman
           - ufw
 
-    - name: "Create {{ containers_user }} user"
+    - name: 'Create user named "{{ containers_user }}"'
       ansible.builtin.user:
         name: "{{ containers_user }}"
         create_home: true
@@ -18,18 +19,21 @@
         shell: /sbin/nologin
         system: true
 
-    - name: "Add subuid and subgid to {{ containers_user }} user"
+    - name: 'Add subuid and subgid to user named {{ containers_user }}'
       ansible.builtin.command: "usermod --add-subuids 200000-265535 --add-subgids 200000-265535 {{ containers_user }}"
+      changed_when: true
 
-    - name: "Set permissions to {{ containers_user }} home directory"
+    - name: 'Set permissions to home directory of user "{{ containers_user }}'
       ansible.builtin.file:
         group: root
         mode: "750"
         owner: "{{ containers_user }}"
         path: "{{ containers_home }}"
 
-    - name: "Enable linger for {{ containers_user }} user"
-      ansible.builtin.command: "loginctl enable-linger {{ containers_user }}"
+    - name: 'Enable linger for user named "{{ containers_user }}"'
+      ansible.builtin.command:
+        cmd: "loginctl enable-linger {{ containers_user }}"
+        creates: '/var/lib/systemd/linger/{{ containers_user }}'
 
     - name: "Redirect HTTP and HTTPS ports to unprivileged ports"
       ansible.builtin.blockinfile:
@@ -57,11 +61,13 @@
         - "8080 proto tcp"
         - "8443"
 
-- become: true
+- name: Containers operations
+  become: true
   become_user: containers
   block:
-    - name: Create destination directory
+    - name: Create Quadlet destination directory
       ansible.builtin.file:
+        mode: "0755"
         path: "{{ quadlet_dir }}"
         state: directory
 
@@ -69,6 +75,7 @@
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: "{{ quadlet_dir }}/{{ item | basename }}"
+        mode: preserve
       with_fileglob:
         - "*.network"
         - "*.volume"

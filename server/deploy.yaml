@@ -1,11 +1,12 @@
 ---
-- hosts: appserver
+- name: Install everything
+  hosts: appserver
   vars:
-    MY_BASE_DN: "dc=app,dc=redaril,dc=me"
-    MY_DOMAIN: "app.redaril.me"
-    MY_EMAIL: "fabio@redaril.me"
-    MY_INITIAL_PASSWORD: password
-    MY_USERNAME: livingsilver94
+    my_base_dn: "dc=app,dc=redaril,dc=me"
+    my_domain: "app.redaril.me"
+    my_email: "fabio@redaril.me"
+    my_initial_password: password
+    my_username: livingsilver94
     containers_user: "containers"
     containers_home: "/var/lib/{{ containers_user }}"
     quadlet_dir: "{{ containers_home }}/.config/containers/systemd"

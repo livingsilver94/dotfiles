@@ -11,10 +11,10 @@ AutoUpdate=registry
 Environment=LLDAP_DATABASE_URL="postgres://lldap:lldap@postgresql/lldap"
 Environment=LLDAP_JWT_SECRET_FILE=/run/secrets/LLDAP_JWT_SECRET
 Environment=LLDAP_KEY_SEED_FILE=/run/secrets/LLDAP_KEY_SEED
-Environment=LLDAP_LDAP_BASE_DN="{{ MY_BASE_DN }}"
-Environment=LLDAP_LDAP_USER_DN="{{ MY_USERNAME }}"
-Environment=LLDAP_LDAP_USER_EMAIL={{ MY_EMAIL }}
-Environment=LLDAP_LDAP_USER_PASS={{ MY_INITIAL_PASSWORD }}
+Environment=LLDAP_LDAP_BASE_DN="{{ my_base_dn }}"
+Environment=LLDAP_LDAP_USER_DN="{{ my_username }}"
+Environment=LLDAP_LDAP_USER_EMAIL={{ my_email }}
+Environment=LLDAP_LDAP_USER_PASS={{ my_initial_password }}
 Network=authentication.network
 Network=database.network
 Network=webserver.network

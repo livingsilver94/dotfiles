@@ -9,6 +9,7 @@
 
 - name: Copy Mealie Quadlet
   ansible.builtin.template:
+    mode: preserve
     src: "{{ item }}"
     dest: "{{ quadlet_dir }}/{{ item | basename }}"
   with_fileglob:

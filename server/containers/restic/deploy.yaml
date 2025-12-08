@@ -3,6 +3,7 @@
   ansible.builtin.template:
     src: "{{ item }}"
     dest: "{{ quadlet_dir }}/{{ item | basename }}"
+    mode: preserve
   with_fileglob:
     - "*.container"
     - "*.volume"

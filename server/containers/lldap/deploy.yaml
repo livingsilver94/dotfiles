@@ -11,3 +11,4 @@
   ansible.builtin.template:
     src: lldap.container
     dest: "{{ quadlet_dir }}/lldap.container"
+    mode: preserve

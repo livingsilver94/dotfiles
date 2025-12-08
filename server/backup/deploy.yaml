@@ -1,5 +1,6 @@
 ---
-- become: true
+- name: Install the backup service
+  become: true
   block:
     - name: Install dependencies of the backup service
       ansible.builtin.apt:
@@ -17,6 +18,7 @@
 
     - name: Create directory for systemd credentials
       ansible.builtin.file:
+        mode: "0755"
         path: "/etc/systemd/credentials"
         state: directory
 
@@ -24,11 +26,13 @@
       ansible.builtin.copy:
         content: "{{ appserver_backup_repository.value }}"
         dest: "/etc/systemd/credentials/appserver_backup_repository"
+        mode: preserve
 
     - name: Copy systemd units for backup
       ansible.builtin.template:
         src: "{{ item }}"
         dest: "/etc/systemd/system/"
+        mode: preserve
       with_fileglob:
         - "*.service"
         - "*.timer"

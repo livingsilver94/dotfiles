@@ -6,7 +6,7 @@ Image=docker.io/boky/postfix:latest-alpine
 ContainerName=postfix
 
 AutoUpdate=registry
-Environment=ALLOWED_SENDER_DOMAINS={{ MY_DOMAIN }}
+Environment=ALLOWED_SENDER_DOMAINS={{ my_domain }}
 Environment=RELAYHOST_PASSWORD_FILE=/run/secrets/POSTFIX_RELAYHOST_PASSWORD
 Environment=RELAYHOST_USERNAME=app@app.redaril.me
 Environment=RELAYHOST=smtp.eu.mailgun.org

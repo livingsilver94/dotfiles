@@ -9,12 +9,12 @@ Image=docker.io/nextcloud:apache
 ContainerName=nextcloud
 
 AutoUpdate=registry
-Environment=MAIL_DOMAIN={{ MY_DOMAIN }}
+Environment=MAIL_DOMAIN={{ my_domain }}
 Environment=MAIL_FROM_ADDRESS=nextcloud
-Environment=MY_DOMAIN={{ MY_DOMAIN }}
-Environment=NEXTCLOUD_ADMIN_PASSWORD={{ MY_INITIAL_PASSWORD }}
-Environment=NEXTCLOUD_ADMIN_USER={{ MY_USERNAME }}
-Environment=NEXTCLOUD_TRUSTED_DOMAINS="nextcloud.{{ MY_DOMAIN }}"
+Environment=MY_DOMAIN={{ my_domain }}
+Environment=NEXTCLOUD_ADMIN_PASSWORD={{ my_initial_password }}
+Environment=NEXTCLOUD_ADMIN_USER={{ my_username }}
+Environment=NEXTCLOUD_TRUSTED_DOMAINS="nextcloud.{{ my_domain }}"
 Environment=POSTGRES_DB=nextcloud
 Environment=POSTGRES_HOST=postgresql
 Environment=POSTGRES_PASSWORD=nextcloud

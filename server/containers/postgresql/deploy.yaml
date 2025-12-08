@@ -11,11 +11,13 @@
   ansible.builtin.copy:
     src: conf/
     dest: "{{ quadlet_dir }}/postgresql/"
+    mode: preserve
 
 - name: Copy PostgreSQL Quadlet
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ quadlet_dir }}/{{ item | basename }}"
+    mode: preserve
   with_fileglob:
     - "*.container"
     - "*.volume"

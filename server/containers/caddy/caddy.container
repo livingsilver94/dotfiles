@@ -6,11 +6,11 @@ Image=docker.io/caddy:alpine
 ContainerName=caddy
 
 AutoUpdate=registry
-Environment=MY_DOMAIN={{ MY_DOMAIN }}
+Environment=MY_DOMAIN={{ my_domain }}
 Network=authentication.network
 Network=internet.network
 Network=webserver.network
-NetworkAlias=authelia.{{ MY_DOMAIN }}
+NetworkAlias=authelia.{{ my_domain }}
 Notify=true
 User=root
 Volume=./caddy:/etc/caddy:ro,Z
