@@ -16,7 +16,7 @@
       notify:
         - "Require reboot upon new environment variables"
     - name: "Ask to reboot if necessary"
-      meta: flush_handlers
+      ansible.builtin.meta: flush_handlers
 
     - name: "Install packages without specific configuration"
       ansible.builtin.package:
