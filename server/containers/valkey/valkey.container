@@ -6,10 +6,11 @@ Image=docker.io/valkey/valkey:latest
 ContainerName=valkey
 
 AutoUpdate=registry
-Exec=valkey-server /etc/valkey/valkey.conf --supervised systemd
+Exec=valkey-server /etc/valkey/valkey.conf
 Network=database.network
 Notify=true
 Volume=./valkey/valkey.conf:/etc/valkey/valkey.conf:ro,Z
+Volume=valkey-data.volume:/data:Z
 
 [Service]
 Restart=on-failure
