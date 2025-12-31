@@ -2,6 +2,10 @@
 - name: Install everything
   hosts: 127.0.0.1
   connection: local
+  vars:
+    my_computer_name: phoenix
+    my_domain: "app.redaril.me"
+    my_username: livingsilver94
   tasks:
     - name: "Create environment.d directory"
       ansible.builtin.file:
@@ -35,6 +39,9 @@
 
     - name: "Install ZSH"
       ansible.builtin.import_tasks: "zsh/deploy.yaml"
+
+    - name: "Configure automatic backup"
+      ansible.builtin.import_tasks: "backup/deploy.yaml"
 
   handlers:
     - name: "Require reboot upon new environment variables"
