@@ -28,6 +28,7 @@ Environment=SMTP_FROM_EMAIL=mealie@{{ my_domain }}
 Environment=SMTP_HOST=postfix
 Network=database.network
 Network=email.network
+Network=internet.network
 Network=webserver.network
 Secret=MEALIE_CLIENT_SECRET
 Volume=mealie-data.volume:/app/data:Z
