@@ -1,0 +1,65 @@
+---
+- name: Install the backup service
+  block:
+    - name: Install dependencies of the backup service
+      become: true
+      ansible.builtin.package:
+        name:
+          - restic
+
+    - name: Encrypt repository URL for backup
+      community.general.systemd_creds_encrypt:
+        name: backup_repo_url
+        # yamllint disable-line rule:line-length
+        secret: "rest:https://{{ my_username }}:{{ lookup('file', 'secret/user_password') }}@restic.{{ my_domain }}/{{ my_computer_name }}"
+        user: self
+      register: backup_repo_url
+
+    - name: Encrypt repository password for backup
+      community.general.systemd_creds_encrypt:
+        name: backup_repo_password
+        secret: "{{ lookup('file', 'secret/repo_password') }}"
+        user: self
+      register: backup_repo_password
+
+    - name: Create directory for systemd credentials
+      ansible.builtin.file:
+        mode: "0700"
+        # This is a standard systemd path.
+        # See https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#Credentials
+        path: "{{ lookup('env', 'XDG_CONFIG_HOME') }}/credstore.encrypted"
+        state: directory
+
+    - name: Save encrypted repository URL for backup
+      ansible.builtin.copy:
+        content: "{{ backup_repo_url.value }}"
+        dest: "{{ lookup('env', 'XDG_CONFIG_HOME') }}/credstore.encrypted/backup_repo_url"
+        mode: "0644"
+
+    - name: Save encrypted repository password for backup
+      ansible.builtin.copy:
+        content: "{{ backup_repo_password.value }}"
+        dest: "{{ lookup('env', 'XDG_CONFIG_HOME') }}/credstore.encrypted/backup_repo_password"
+        mode: "0644"
+
+    - name: Create directory for systemd units
+      ansible.builtin.file:
+        mode: "0755"
+        path: "{{ lookup('env', 'XDG_CONFIG_HOME') }}/systemd/user"
+        state: directory
+
+    - name: Copy systemd units for backup
+      ansible.builtin.template:
+        src: "{{ item }}"
+        dest: "{{ lookup('env', 'XDG_CONFIG_HOME') }}/systemd/user/"
+        mode: preserve
+      with_fileglob:
+        - "*.service"
+        - "*.timer"
+
+    - name: Enable backup timer
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+        enabled: true
+        name: backup.timer
+        scope: user

@@ -1,0 +1,40 @@
+[Unit]
+Description=Backup using Restic
+
+[Service]
+Type=oneshot
+
+PassEnvironment=XDG_CONFIG_HOME
+Environment=RETENTION_DAYS=7 RETENTION_WEEKS=4 RETENTION_MONTHS=6 RETENTION_YEARS=3
+Environment=RESTIC_REPOSITORY_FILE=%d/backup_repo_url RESTIC_PASSWORD_FILE=%d/backup_repo_password
+
+# Init the Restic repository, and ignore errors if it already exists.
+ExecStartPre=-/usr/bin/restic init
+
+ExecStart=/usr/bin/sh -c '. $XDG_CONFIG_HOME/user-dirs.dirs; exec restic backup --tag systemd $XDG_DOCUMENTS_DIR $XDG_MUSIC_DIR $XDG_PICTURES_DIR'
+
+ExecStartPost=/usr/bin/restic forget \
+    --group-by "paths,tags" \
+    --keep-daily $RETENTION_DAYS \
+    --keep-monthly $RETENTION_MONTHS \
+    --keep-weekly $RETENTION_WEEKS \
+    --keep-yearly $RETENTION_YEARS \
+    --tag systemd \
+    --verbose \
+
+LoadCredentialEncrypted=backup_repo_url
+LoadCredentialEncrypted=backup_repo_password
+
+CapabilityBoundingSet=
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectSystem=true
+RestrictAddressFamilies=AF_INET
+RestrictAddressFamilies=AF_INET6
+RestrictNamespaces=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=default.target
