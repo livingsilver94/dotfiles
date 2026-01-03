@@ -1,2 +1,4 @@
 [Network]
+InterfaceName=internet
+IPv6=true
 NetworkName=internet
