@@ -45,6 +45,8 @@
           -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
           -A PREROUTING -p udp --dport 443 -j REDIRECT --to-port 8443
           -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443
+          -A OUTPUT -o lo -p udp --dport 443 -j REDIRECT --to-port 8443
+          -A OUTPUT -o lo -p tcp --dport 443 -j REDIRECT --to-port 8443
           COMMIT
         append_newline: true
         backup: true
@@ -89,6 +91,7 @@
         - caddy
         - cloudflare-ddns
         - homeassistant
+        - homeassistant-matter-hub
         - lldap
         - mealie
         - nextcloud

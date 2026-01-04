@@ -11,6 +11,7 @@ Network=authentication.network
 Network=internet.network
 Network=webserver.network
 NetworkAlias=authelia.{{ my_domain }}
+NetworkAlias=ha.{{ my_domain }}
 Notify=true
 User=root
 Volume=./caddy:/etc/caddy:ro,Z

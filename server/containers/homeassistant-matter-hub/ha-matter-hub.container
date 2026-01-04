@@ -1,0 +1,18 @@
+[Unit]
+Description=Home Assistant Matter Hub
+
+[Container]
+Image=ghcr.io/t0bst4r/home-assistant-matter-hub:latest
+ContainerName=ha-matter-hub
+
+AutoUpdate=registry
+Environment=HAMH_HOME_ASSISTANT_URL="https://ha.{{ my_domain }}"
+Environment=HAMH_HOME_ASSISTANT_ACCESS_TOKEN=0yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkYjFlMmZlNTlmZDI0ZTkwYjBiODk0NmIxYjMwZDE5YiIsImlhdCI6MTc2NzQ1MDUwNiwiZXhwIjoyMDgyODEwNTA2fQ.dLoxvuoadKbu-hcImCQzkKCmNwItgNaak3DF0ikBjFI
+Network=host
+Volume=ha-matter-hub-data.volume:/data:Z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
