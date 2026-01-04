@@ -68,40 +68,37 @@
     - name: Create Quadlet destination directory
       ansible.builtin.file:
         mode: "0755"
-        path: "{{ quadlet_dir }}"
+        path: "{{ quadlet_install_dir }}"
         state: directory
 
     - name: Install common Quadlets
       ansible.builtin.copy:
         src: "{{ item }}"
-        dest: "{{ quadlet_dir }}/{{ item | basename }}"
+        dest: "{{ quadlet_install_dir }}/{{ item | basename }}"
         mode: preserve
       with_fileglob:
         - "*.network"
         - "*.volume"
 
-    - name: Install Authelia
-      ansible.builtin.import_tasks: authelia/deploy.yaml
-    - name: Install Caddy
-      ansible.builtin.import_tasks: caddy/deploy.yaml
-    - name: Install Cloudflare DDNS
-      ansible.builtin.import_tasks: cloudflare-ddns/deploy.yaml
-    - name: Install Home Assistant
-      ansible.builtin.import_tasks: homeassistant/deploy.yaml
-    - name: Install LLDAP
-      ansible.builtin.import_tasks: lldap/deploy.yaml
-    - name: Install Nextcloud
-      ansible.builtin.import_tasks: nextcloud/deploy.yaml
-    - name: Install Mealie
-      ansible.builtin.import_tasks: mealie/deploy.yaml
-    - name: Install Postfix
-      ansible.builtin.import_tasks: postfix/deploy.yaml
-    - name: Install PostgreSQL
-      ansible.builtin.import_tasks: postgresql/deploy.yaml
-    - name: Install Restic
-      ansible.builtin.import_tasks: restic/deploy.yaml
-    - name: Install Valkey
-      ansible.builtin.import_tasks: valkey/deploy.yaml
+    - name: Install Quadlets
+      ansible.builtin.include_role:
+        name: quadlet
+      vars: {quadlet_name: "{{ qname }}"}
+      loop:
+        - authelia
+        - caddy
+        - cloudflare-ddns
+        - homeassistant
+        - lldap
+        - mealie
+        - nextcloud
+        - postfix
+        - postgresql
+        - restic
+        - valkey
+      loop_control:
+        loop_var: qname
+
     - name: Reload systemd units
       ansible.builtin.systemd_service:
         daemon_reload: true
