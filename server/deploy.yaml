@@ -9,7 +9,7 @@
     my_username: livingsilver94
     containers_user: "containers"
     containers_home: "/var/lib/{{ containers_user }}"
-    quadlet_dir: "{{ containers_home }}/.config/containers/systemd"
+    quadlet_install_dir: "{{ containers_home }}/.config/containers/systemd"
     backups_dir: "/media/data/backup"
   tasks:
     - name: "Install containers"
