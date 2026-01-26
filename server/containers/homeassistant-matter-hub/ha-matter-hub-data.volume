@@ -1,5 +1,0 @@
-[Unit]
-Description=Home Assistant Matter Hub data
-
-[Volume]
-VolumeName=ha-matter-hub-data
