@@ -91,7 +91,6 @@
         - caddy
         - cloudflare-ddns
         - homeassistant
-        - homeassistant-matter-hub
         - lldap
         - mealie
         - nextcloud
