@@ -1,0 +1,5 @@
+[Unit]
+Description=Zigbee2MQTT data volume
+
+[Volume]
+VolumeName=z2m-data

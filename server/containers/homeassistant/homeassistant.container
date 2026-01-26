@@ -5,10 +5,9 @@ Description=Home Assistant
 Image=ghcr.io/home-assistant/home-assistant:stable
 ContainerName=homeassistant
 
-AddDevice=/dev/ttyUSB0:/dev/ttyUSB0
 AutoUpdate=registry
-GroupAdd=keep-groups
 Network=internet.network
+Network=mqtt.network
 Network=webserver.network
 Volume=/etc/localtime:/etc/localtime:ro
 Volume=/run/dbus:/run/dbus:ro,z

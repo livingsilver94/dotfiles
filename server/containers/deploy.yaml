@@ -98,6 +98,7 @@
         - postgresql
         - restic
         - valkey
+        - z2m
       loop_control:
         loop_var: qname
 
