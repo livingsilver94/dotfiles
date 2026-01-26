@@ -1,0 +1,14 @@
+advanced:
+  log_level: warning
+  log_namespaced_levels:
+    z2m:mqtt: warning
+frontend:
+  enabled: true
+homeassistant:
+  enabled: true
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://mosquitto:1883
+onboarding: false
+serial: {}
+version: 4

@@ -1,4 +1,13 @@
 ha.{$MY_DOMAIN} {
 	import common
+	handle_path /z2m/* {
+		forward_auth homeassistant:8123 {
+			uri /api/
+			copy_headers Authorization
+			header_up Authorization "Bearer {http.request.cookie.hass_access_token}"
+			header_up X-Original-URI {uri}
+		}
+		reverse_proxy z2m:8080
+	}
 	reverse_proxy homeassistant:8123
 }
