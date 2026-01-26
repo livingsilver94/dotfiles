@@ -1,0 +1,4 @@
+[Network]
+InterfaceName=mqtt
+Internal=true
+NetworkName=mqtt
