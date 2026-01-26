@@ -93,6 +93,7 @@
         - homeassistant
         - lldap
         - mealie
+        - mosquitto
         - nextcloud
         - postfix
         - postgresql

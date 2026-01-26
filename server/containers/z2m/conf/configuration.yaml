@@ -1,0 +1,8 @@
+homeassistant:
+  enabled: true
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://mosquitto:1883
+onboarding: false
+serial: {}
+version: 4

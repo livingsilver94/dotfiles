@@ -1,5 +1,7 @@
 [Unit]
 Description=Zigbee2MQTT
+Wants=mosquitto.container
+Requires=mosquitto.container
 
 [Container]
 Image=ghcr.io/koenkk/zigbee2mqtt:latest
@@ -13,6 +15,7 @@ Network=internet.network
 Volume=/etc/localtime:/etc/localtime:ro
 Volume=/run/udev:/run/udev:ro
 Volume=z2m-data.volume:/app/data:z
+Volume=./z2m/configuration.yaml:/app/data/configuration.yaml:ro,Z
 
 [Service]
 Restart=on-failure
