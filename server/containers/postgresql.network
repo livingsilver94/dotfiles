@@ -1,0 +1,4 @@
+[Network]
+InterfaceName=postgresql
+Internal=true
+NetworkName=postgresql

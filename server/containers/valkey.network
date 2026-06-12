@@ -1,0 +1,4 @@
+[Network]
+InterfaceName=valkey
+Internal=true
+NetworkName=valkey

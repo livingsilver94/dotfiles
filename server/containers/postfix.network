@@ -1,0 +1,4 @@
+[Network]
+InterfaceName=postfix
+Internal=true
+NetworkName=postfix

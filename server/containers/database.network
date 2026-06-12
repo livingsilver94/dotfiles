@@ -1,4 +1,0 @@
-[Network]
-InterfaceName=database
-Internal=true
-NetworkName=database

@@ -19,8 +19,9 @@ Environment=MY_BASE_DN={{ my_base_dn }}
 Environment=MY_DOMAIN={{ my_domain }}
 Environment=X_AUTHELIA_CONFIG_FILTERS=template
 Network=authentication.network
-Network=database.network
-Network=email.network
+Network=postfix.network
+Network=postgresql.network
+Network=valkey.network
 Secret=AUTHELIA_JWT_SECRET
 Secret=AUTHELIA_LDAP_USER_PASSWORD
 Secret=AUTHELIA_OIDC_PRIVATE_KEY

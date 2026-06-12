@@ -16,7 +16,7 @@ Environment=LLDAP_LDAP_USER_DN="{{ my_username }}"
 Environment=LLDAP_LDAP_USER_EMAIL={{ my_email }}
 Environment=LLDAP_LDAP_USER_PASS={{ my_initial_password }}
 Network=authentication.network
-Network=database.network
+Network=postgresql.network
 Network=webserver.network
 Secret=LLDAP_JWT_SECRET
 Secret=LLDAP_KEY_SEED

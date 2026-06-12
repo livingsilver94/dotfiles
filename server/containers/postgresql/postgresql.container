@@ -7,7 +7,7 @@ ContainerName=postgresql
 
 AutoUpdate=registry
 Environment=POSTGRES_PASSWORD_FILE=/run/secrets/POSTGRESQL_ADMIN_PASSWORD
-Network=database.network
+Network=postgresql.network
 Secret=POSTGRESQL_ADMIN_PASSWORD
 User=postgres
 Volume=./postgresql/init:/docker-entrypoint-initdb.d:ro,Z

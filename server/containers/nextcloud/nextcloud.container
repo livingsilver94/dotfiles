@@ -22,9 +22,10 @@ Environment=POSTGRES_USER=nextcloud
 Environment=REDIS_HOST=valkey
 Environment=SMTP_AUTHTYPE=plain
 Environment=SMTP_HOST=postfix
-Network=database.network
-Network=email.network
 Network=internet.network
+Network=postgresql.network
+Network=postfix.network
+Network=valkey.network
 Network=webserver.network
 Secret=NEXTCLOUD_CLIENT_SECRET
 User=root

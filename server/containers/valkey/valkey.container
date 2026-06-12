@@ -7,7 +7,7 @@ ContainerName=valkey
 
 AutoUpdate=registry
 Exec=valkey-server /etc/valkey/valkey.conf
-Network=database.network
+Network=valkey.network
 Notify=true
 Volume=./valkey/valkey.conf:/etc/valkey/valkey.conf:ro,Z
 Volume=valkey-data.volume:/data:Z
