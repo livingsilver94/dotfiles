@@ -1,0 +1,20 @@
+[Unit]
+Description=Homepage Dashboard
+Requires=caddy.container
+After=caddy.container
+
+[Container]
+Image=ghcr.io/gethomepage/homepage:latest
+ContainerName=homepage
+
+AutoUpdate=registry
+Environment=HOMEPAGE_ALLOWED_HOSTS={{ my_domain }}
+Network=webserver.network
+Volume=/%t/podman/podman.sock:/var/run/podman.sock:ro
+Volume=./homepage:/app/config:Z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

@@ -91,6 +91,7 @@
         - caddy
         - cloudflare-ddns
         - homeassistant
+        - homepage
         - lldap
         - mealie
         - mosquitto
