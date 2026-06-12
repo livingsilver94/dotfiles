@@ -14,12 +14,12 @@
         name: "{{ containers_user }}"
         create_home: true
         groups:
-          - "dialout"  # For the Zigbee Hub, that is a serial device.
+          - "dialout" # For the Zigbee Hub, that is a serial device.
         home: "{{ containers_home }}"
         shell: /sbin/nologin
         system: true
 
-    - name: 'Add subuid and subgid to user named {{ containers_user }}'
+    - name: "Add subuid and subgid to user named {{ containers_user }}"
       ansible.builtin.command: "usermod --add-subuids 200000-265535 --add-subgids 200000-265535 {{ containers_user }}"
       changed_when: true
 
@@ -33,7 +33,7 @@
     - name: 'Enable linger for user named "{{ containers_user }}"'
       ansible.builtin.command:
         cmd: "loginctl enable-linger {{ containers_user }}"
-        creates: '/var/lib/systemd/linger/{{ containers_user }}'
+        creates: "/var/lib/systemd/linger/{{ containers_user }}"
 
     - name: "Redirect HTTP and HTTPS ports to unprivileged ports"
       ansible.builtin.blockinfile:
@@ -59,7 +59,7 @@
         rule: allow
         state: enabled
       loop:
-        - ssh  # Keep it above otherwise we get closed out!
+        - ssh # Keep it above otherwise we get closed out!
         - "8080 proto tcp"
         - "8443"
 
@@ -85,7 +85,7 @@
     - name: Install Quadlets
       ansible.builtin.include_role:
         name: quadlet
-      vars: {quadlet_name: "{{ qname }}"}
+      vars: { quadlet_name: "{{ qname }}" }
       loop:
         - authelia
         - caddy

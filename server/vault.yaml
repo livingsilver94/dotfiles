@@ -1,0 +1,14 @@
+---
+secrets:
+  authelia_jwt_secret: "CHANGE_ME"
+  authelia_ldap_user_password: "CHANGE_ME"
+  authelia_oidc_private_key: "CHANGE_ME"
+  authelia_session_secret: "CHANGE_ME"
+  authelia_storage_encryption_key: "CHANGE_ME"
+  cloudflare_ddns_token: "CHANGE_ME"
+  lldap_jwt_secret: "CHANGE_ME"
+  lldap_key_seed: "CHANGE_ME"
+  mealie_client_secret: "CHANGE_ME"
+  nextcloud_client_secret: "CHANGE_ME"
+  postgresql_admin_password: "CHANGE_ME"
+  postfix_relayhost_password: "CHANGE_ME"

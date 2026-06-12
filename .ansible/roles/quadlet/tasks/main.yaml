@@ -1,11 +1,10 @@
 ---
 - name: Create secrets of {{ quadlet_name }}
   containers.podman.podman_secret:
-    name: "{{ quadlet_name | upper }}_{{ item | basename }}"
-    data: "{{ lookup('file', '{{ item }}') }}"
+    name: "{{ item.key | upper }}"
+    data: "{{ item.value }}"
     skip_existing: true
-  with_fileglob:
-    - "containers/{{ quadlet_name }}/secret/*"
+  loop: "{{ secrets | dict2items | selectattr('key', 'match', '^' + quadlet_name + '_') | list }}"
 
 - name: Copy config of {{ quadlet_name }}
   ansible.builtin.copy:

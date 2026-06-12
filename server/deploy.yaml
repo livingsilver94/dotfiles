@@ -11,6 +11,8 @@
     containers_home: "/var/lib/{{ containers_user }}"
     quadlet_install_dir: "{{ containers_home }}/.config/containers/systemd"
     backups_dir: "/media/data/backup"
+  vars_files:
+    - vault.yaml
   tasks:
     - name: "Install containers"
       ansible.builtin.import_tasks: "containers/deploy.yaml"
