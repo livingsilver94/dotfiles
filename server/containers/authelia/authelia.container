@@ -1,7 +1,8 @@
 [Unit]
 Description=Authelia Authentication Service
-After=lldap.container postgresql.container
-Requires=lldap.container postgresql.container
+After=lldap.container postgresql.container valkey.container postfix.container
+Requires=lldap.container postgresql.container valkey.container
+Wants=postfix.container
 
 [Container]
 Image=docker.io/authelia/authelia:latest

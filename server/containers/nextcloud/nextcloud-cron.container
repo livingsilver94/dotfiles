@@ -1,8 +1,8 @@
 [Unit]
 Description=Nextcloud cron job
-After=postgresql.container valkey.container
+After=postgresql.container valkey.container nextcloud.container
 Requires=postgresql.container
-Wants=valkey.container
+Wants=valkey.container nextcloud.container
 
 [Container]
 Image=docker.io/nextcloud:apache

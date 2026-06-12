@@ -1,7 +1,7 @@
 [Unit]
 Description=Light LDAP
-After=postfix.container postgresql.container valkey.container
-Requires=postfix.container postgresql.container valkey.container
+After=postgresql.container
+Requires=postgresql.container
 
 [Container]
 Image=docker.io/lldap/lldap:latest-alpine-rootless

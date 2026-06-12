@@ -1,8 +1,8 @@
 [Unit]
 Description=Nextcloud
-After=postgresql.container valkey.container
+After=postgresql.container valkey.container postfix.container
 Requires=postgresql.container
-Wants=valkey.container
+Wants=valkey.container postfix.container
 
 [Container]
 Image=docker.io/nextcloud:apache

@@ -1,7 +1,8 @@
 [Unit]
 Description=Mealie recipe manager
-Wants=postgresql.container
+After=postgresql.container postfix.container authelia.container
 Requires=postgresql.container
+Wants=postfix.container authelia.container
 
 [Container]
 Image=ghcr.io/mealie-recipes/mealie:latest

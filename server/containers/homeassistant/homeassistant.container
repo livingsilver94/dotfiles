@@ -1,5 +1,7 @@
 [Unit]
 Description=Home Assistant
+After=mosquitto.container
+Wants=mosquitto.container
 
 [Container]
 Image=ghcr.io/home-assistant/home-assistant:stable

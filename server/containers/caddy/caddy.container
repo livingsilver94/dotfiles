@@ -1,5 +1,7 @@
 [Unit]
 Description=Caddy web server
+After=authelia.container
+Wants=authelia.container
 
 [Container]
 Image=docker.io/caddy:alpine
