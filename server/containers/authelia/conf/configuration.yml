@@ -18,13 +18,13 @@ server:
   endpoints:
     authz:
       forward-auth:
-        implementation: 'ForwardAuth'
+        implementation: "ForwardAuth"
         authn_strategies:
-          - name: 'HeaderAuthorization'
+          - name: "HeaderAuthorization"
             schemes:
-              - 'Basic'
+              - "Basic"
             scheme_basic_cache_lifespan: 0
-          - name: 'CookieSession'
+          - name: "CookieSession"
 
 definitions:
   user_attributes:
@@ -34,8 +34,9 @@ definitions:
 
 identity_providers:
   oidc:
+    consent_mode: "implicit"
     jwks:
-      - key: {{secret "/run/secrets/AUTHELIA_OIDC_PRIVATE_KEY" | mindent 10 "|" | msquote}}
+      - key: '{{secret "/run/secrets/AUTHELIA_OIDC_PRIVATE_KEY" | mindent 10 "|" | msquote}}'
     lifespans:
       access_token: "30d"
       refresh_token: "30d"
@@ -48,10 +49,19 @@ identity_providers:
         - "userinfo"
     claims_policies:
       default:
-        id_token: ["groups", "email", "email_verified", "alt_emails", "preferred_username", "name"]
+        id_token:
+          [
+            "groups",
+            "email",
+            "email_verified",
+            "alt_emails",
+            "preferred_username",
+            "name",
+          ]
       nextcloud_userinfo:
         custom_claims:
-          is_nextcloud_admin: {}
+          is_nextcloud_admin:
+            display_name: "Nextcloud Administrator"
     scopes:
       nextcloud_userinfo:
         claims:
@@ -73,7 +83,6 @@ identity_providers:
           - "groups"
         userinfo_signed_response_alg: "none"
         token_endpoint_auth_method: "client_secret_post"
-        consent_mode: "implicit"
 
       - client_id: "mealie"
         client_name: "Mealie"
