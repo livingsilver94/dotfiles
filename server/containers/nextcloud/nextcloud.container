@@ -9,7 +9,6 @@ Image=docker.io/nextcloud:apache
 ContainerName=nextcloud
 
 AutoUpdate=registry
-Environment=MAIL_DOMAIN={{ my_domain }}
 Environment=MAIL_FROM_ADDRESS=nextcloud
 Environment=MY_DOMAIN={{ my_domain }}
 Environment=NEXTCLOUD_ADMIN_PASSWORD={{ my_initial_password }}
@@ -22,6 +21,12 @@ Environment=POSTGRES_USER=nextcloud
 Environment=REDIS_HOST=valkey
 Environment=SMTP_AUTHTYPE=plain
 Environment=SMTP_HOST=postfix
+Label=homepage.group=Productivity
+Label=homepage.name=Nextcloud
+Label=homepage.href=https://nextcloud.{{ my_domain }}
+Label=homepage.icon=nextcloud.png
+Label=homepage.description=File storage and collaboration
+Environment=MAIL_DOMAIN={{ my_domain }}
 Network=internet.network
 Network=postgresql.network
 Network=postfix.network

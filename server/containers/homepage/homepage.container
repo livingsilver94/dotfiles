@@ -1,0 +1,18 @@
+[Unit]
+Description=Homepage Dashboard
+
+[Container]
+Image=ghcr.io/gethomepage/homepage:latest
+ContainerName=homepage
+
+AutoUpdate=registry
+Network=webserver.network
+ReadOnly=true
+Volume=%t/podman/podman.sock:/var/run/docker.sock:ro
+Volume=./homepage/conf:/app/config:Z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

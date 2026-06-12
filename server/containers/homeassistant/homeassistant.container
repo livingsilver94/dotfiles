@@ -8,6 +8,11 @@ Image=ghcr.io/home-assistant/home-assistant:stable
 ContainerName=homeassistant
 
 AutoUpdate=registry
+Label=homepage.group=Smart Home
+Label=homepage.name=Home Assistant
+Label=homepage.href=https://homeassistant.{{ my_domain }}
+Label=homepage.icon=home-assistant.png
+Label=homepage.description=Home automation
 Network=internet.network
 Network=mqtt.network
 Network=webserver.network

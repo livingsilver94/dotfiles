@@ -27,6 +27,11 @@ Environment=POSTGRES_USER="mealie"
 Environment=SMTP_AUTH_STRATEGY=NONE
 Environment=SMTP_FROM_EMAIL=mealie@{{ my_domain }}
 Environment=SMTP_HOST=postfix
+Label=homepage.group=Productivity
+Label=homepage.name=Mealie
+Label=homepage.href=https://mealie.{{ my_domain }}
+Label=homepage.icon=mealie.png
+Label=homepage.description=Recipe manager
 Network=internet.network
 Network=postgresql.network
 Network=postfix.network

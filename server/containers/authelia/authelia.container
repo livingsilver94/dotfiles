@@ -18,6 +18,11 @@ Environment=AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/AUTHELIA_STORAGE_E
 Environment=MY_BASE_DN={{ my_base_dn }}
 Environment=MY_DOMAIN={{ my_domain }}
 Environment=X_AUTHELIA_CONFIG_FILTERS=template
+Label=homepage.group=Admin
+Label=homepage.name=Authelia
+Label=homepage.href=https://authelia.{{ my_domain }}
+Label=homepage.icon=authelia.png
+Label=homepage.description=Authentication and authorization
 Network=authentication.network
 Network=postfix.network
 Network=postgresql.network
