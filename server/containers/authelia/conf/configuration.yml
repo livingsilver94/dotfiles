@@ -34,9 +34,8 @@ definitions:
 
 identity_providers:
   oidc:
-    consent_mode: "implicit"
     jwks:
-      - key: '{{secret "/run/secrets/authelia_oidc_private_key" | mindent 10 "|" | msquote}}'
+      - key: {{secret "/run/secrets/authelia_oidc_private_key" | mindent 10 "|" }}
     lifespans:
       access_token: "30d"
       refresh_token: "30d"
