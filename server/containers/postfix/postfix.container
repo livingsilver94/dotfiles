@@ -10,8 +10,15 @@ Environment=ALLOWED_SENDER_DOMAINS={{ my_domain }}
 Environment=RELAYHOST_PASSWORD_FILE=/run/secrets/postfix_relayhost_password
 Environment=RELAYHOST_USERNAME=app@app.redaril.me
 Environment=RELAYHOST=smtp.eu.mailgun.org
+HealthCmd=/scripts/healthcheck.sh
+HealthInterval=30s
+HealthRetries=3
+HealthStartPeriod=30s
+HealthStartupInterval=2s
+HealthTimeout=5s
 Network=internet.network
 Network=postfix.network
+Notify=healthy
 Secret=postfix_relayhost_password
 
 [Service]

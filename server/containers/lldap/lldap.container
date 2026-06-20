@@ -15,6 +15,7 @@ Environment=LLDAP_LDAP_BASE_DN="{{ my_base_dn }}"
 Environment=LLDAP_LDAP_USER_DN="{{ my_username }}"
 Environment=LLDAP_LDAP_USER_EMAIL={{ my_email }}
 Environment=LLDAP_LDAP_USER_PASS={{ my_initial_password }}
+HealthCmd=/app/lldap healthcheck --config-file /data/lldap_config.toml
 Label=homepage.group=Admin
 Label=homepage.name=lldap
 Label=homepage.href=https://lldap.{{ my_domain }}
@@ -23,6 +24,7 @@ Label=homepage.description=LDAP user management
 Network=authentication.network
 Network=postgresql.network
 Network=webserver.network
+Notify=healthy
 Secret=lldap_jwt_secret
 Secret=lldap_key_seed
 

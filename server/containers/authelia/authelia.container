@@ -18,6 +18,9 @@ Environment=AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/authelia_storage_e
 Environment=MY_BASE_DN={{ my_base_dn }}
 Environment=MY_DOMAIN={{ my_domain }}
 Environment=X_AUTHELIA_CONFIG_FILTERS=template
+HealthCmd=/app/healthcheck.sh
+HealthInterval=30s
+HealthTimeout=3s
 Label=homepage.group=Admin
 Label=homepage.name=Authelia
 Label=homepage.href=https://authelia.{{ my_domain }}
@@ -27,6 +30,7 @@ Network=authentication.network
 Network=postfix.network
 Network=postgresql.network
 Network=valkey.network
+Notify=healthy
 Secret=authelia_jwt_secret
 Secret=authelia_ldap_user_password
 Secret=authelia_oidc_private_key
