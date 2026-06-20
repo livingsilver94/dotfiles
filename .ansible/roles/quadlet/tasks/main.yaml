@@ -1,7 +1,7 @@
 ---
 - name: Create secrets of {{ quadlet_name }}
   containers.podman.podman_secret:
-    name: "{{ item.key | upper }}"
+    name: "{{ item.key }}"
     data: "{{ item.value }}"
     skip_existing: true
   loop: "{{ secrets | dict2items | selectattr('key', 'match', '^' + quadlet_name + '_') | list }}"

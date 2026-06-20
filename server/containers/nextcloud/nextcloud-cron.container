@@ -17,7 +17,7 @@ Environment=POSTGRES_USER=nextcloud
 Environment=REDIS_HOST=valkey
 Network=postgresql.network
 Network=valkey.network
-Secret=NEXTCLOUD_CLIENT_SECRET
+Secret=nextcloud_client_secret
 User=root
 Volume=nextcloud-data.volume:/var/www/html:z
 

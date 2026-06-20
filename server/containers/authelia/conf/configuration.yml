@@ -36,7 +36,7 @@ identity_providers:
   oidc:
     consent_mode: "implicit"
     jwks:
-      - key: '{{secret "/run/secrets/AUTHELIA_OIDC_PRIVATE_KEY" | mindent 10 "|" | msquote}}'
+      - key: '{{secret "/run/secrets/authelia_oidc_private_key" | mindent 10 "|" | msquote}}'
     lifespans:
       access_token: "30d"
       refresh_token: "30d"
@@ -86,7 +86,7 @@ identity_providers:
 
       - client_id: "mealie"
         client_name: "Mealie"
-        client_secret: '{{secret "/run/secrets/MEALIE_CLIENT_SECRET"}}'
+        client_secret: '{{secret "/run/secrets/mealie_client_secret"}}'
         claims_policy: "default"
         authorization_policy: "one_factor"
         require_pkce: true
@@ -103,7 +103,7 @@ identity_providers:
 
       - client_id: "nextcloud"
         client_name: "NextCloud"
-        client_secret: '{{secret "/run/secrets/NEXTCLOUD_CLIENT_SECRET"}}'
+        client_secret: '{{secret "/run/secrets/nextcloud_client_secret"}}'
         public: false
         authorization_policy: "one_factor"
         require_pkce: true
@@ -140,7 +140,7 @@ session:
   inactivity: 1M
   redis:
     host: valkey
-  secret: '{{secret "/run/secrets/AUTHELIA_SESSION_SECRET"}}'
+  secret: '{{secret "/run/secrets/authelia_session_secret"}}'
 
 storage:
   postgres:

@@ -7,14 +7,14 @@ ContainerName=cloudflare-ddns
 
 AutoUpdate=registry
 DropCapability=all
-Environment=CLOUDFLARE_API_TOKEN_FILE=/run/secrets/CLOUDFLARE_DDNS_TOKEN
+Environment=CLOUDFLARE_API_TOKEN_FILE=/run/secrets/cloudflare_ddns_token
 Environment=DETECTION_TIMEOUT=5s
 Environment=DOMAINS="*.{{ my_domain }},{{ my_domain }}"
 # Wether to use Cloudflare proxy feature.
 Environment=PROXIED="true"
 Network=host
 NoNewPrivileges=true
-Secret=CLOUDFLARE_DDNS_TOKEN
+Secret=cloudflare_ddns_token
 
 [Service]
 Restart=on-failure

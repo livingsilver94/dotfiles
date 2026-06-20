@@ -16,7 +16,7 @@ Environment=OIDC_ADMIN_GROUP="admins"
 Environment=OIDC_AUTH_ENABLED="true"
 Environment=OIDC_AUTO_REDIRECT="true"
 Environment=OIDC_CLIENT_ID="mealie"
-Environment=OIDC_CLIENT_SECRET_FILE="/run/secrets/MEALIE_CLIENT_SECRET"
+Environment=OIDC_CLIENT_SECRET_FILE="/run/secrets/mealie_client_secret"
 Environment=OIDC_CONFIGURATION_URL="https://authelia.{{ my_domain }}/.well-known/openid-configuration"
 Environment=OIDC_SIGNUP_ENABLED="true"
 Environment=OIDC_USER_GROUP="mealie-users"
@@ -36,7 +36,7 @@ Network=internet.network
 Network=postgresql.network
 Network=postfix.network
 Network=webserver.network
-Secret=MEALIE_CLIENT_SECRET
+Secret=mealie_client_secret
 Volume=mealie-data.volume:/app/data:Z
 
 [Service]

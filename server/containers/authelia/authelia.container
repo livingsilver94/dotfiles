@@ -9,9 +9,9 @@ Image=docker.io/authelia/authelia:latest
 ContainerName=authelia
 
 AutoUpdate=registry
-Environment=AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE=/run/secrets/AUTHELIA_LDAP_USER_PASSWORD
-Environment=AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE=/run/secrets/AUTHELIA_JWT_SECRET
-Environment=AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/AUTHELIA_STORAGE_ENCRYPTION_KEY
+Environment=AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE=/run/secrets/authelia_ldap_user_password
+Environment=AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE=/run/secrets/authelia_jwt_secret
+Environment=AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/authelia_storage_encryption_key
 # Environment variables are more convenient to configure services,
 # unfortunately not every configuration entry has the equivalent env var in Authelia.
 # For now, we have to rely on configuration.yml.
@@ -27,13 +27,13 @@ Network=authentication.network
 Network=postfix.network
 Network=postgresql.network
 Network=valkey.network
-Secret=AUTHELIA_JWT_SECRET
-Secret=AUTHELIA_LDAP_USER_PASSWORD
-Secret=AUTHELIA_OIDC_PRIVATE_KEY
-Secret=AUTHELIA_SESSION_SECRET
-Secret=AUTHELIA_STORAGE_ENCRYPTION_KEY
-Secret=MEALIE_CLIENT_SECRET
-Secret=NEXTCLOUD_CLIENT_SECRET
+Secret=authelia_jwt_secret
+Secret=authelia_ldap_user_password
+Secret=authelia_oidc_private_key
+Secret=authelia_session_secret
+Secret=authelia_storage_encryption_key
+Secret=mealie_client_secret
+Secret=nextcloud_client_secret
 Volume=./authelia/configuration.yml:/config/configuration.yml:ro,Z
 
 [Service]
