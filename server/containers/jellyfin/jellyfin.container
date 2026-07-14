@@ -1,0 +1,24 @@
+[Unit]
+Description=Media browser and streaming server
+After=caddy.container
+Requires=caddy.container
+
+[Container]
+Image=docker.io/jellyfin/jellyfin:latest
+ContainerName=jellyfin
+
+AddDevice=/dev/dri/:/dev/dri/
+AutoUpdate=registry
+GroupAdd=keep-groups
+Network=internet.network
+Network=webserver.network
+Volume=jellyfin-cache.volume:/cache:Z
+Volume=jellyfin-config.volume:/config:Z
+Volume=/media/data/Multimedia:/media:Z
+
+[Service]
+Restart=on-failure
+SuccessExitStatus=0 143 # Inform systemd of additional exit status.
+
+[Install]
+WantedBy=default.target

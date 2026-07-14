@@ -15,6 +15,7 @@
         create_home: true
         groups:
           - "dialout" # For the Zigbee Hub, that is a serial device.
+          - "render"  # For hardware acceleration in Jellyfin.
         home: "{{ containers_home }}"
         shell: /sbin/nologin
         system: true
@@ -92,6 +93,7 @@
         - cloudflare-ddns
         - homeassistant
         - homepage
+        - jellyfin
         - lldap
         - mealie
         - mosquitto
