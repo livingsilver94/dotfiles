@@ -1,3 +1,4 @@
+---
 advanced:
   log_level: warning
   log_namespaced_levels:

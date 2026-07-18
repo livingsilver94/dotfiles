@@ -1,2 +1,3 @@
+---
 default:
   socket: /var/run/podman.sock

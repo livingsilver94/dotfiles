@@ -35,7 +35,7 @@ definitions:
 identity_providers:
   oidc:
     jwks:
-      - key: {{secret "/run/secrets/authelia_oidc_private_key" | mindent 10 "|" }}
+      - key: {{secret "/run/secrets/authelia_oidc_private_key" | mindent 10 "|"}}
     lifespans:
       access_token: "30d"
       refresh_token: "30d"
@@ -69,7 +69,8 @@ identity_providers:
       - client_id: "jellyfin"
         client_name: "Jellyfin"
         # The digest of 'insecure_secret'.
-        client_secret: "$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng"
+        client_secret: >
+          $pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng
         public: false
         authorization_policy: "one_factor"
         require_pkce: true
