@@ -38,7 +38,7 @@ Secret=authelia_session_secret
 Secret=authelia_storage_encryption_key
 Secret=mealie_client_secret
 Secret=nextcloud_client_secret
-Volume=./authelia/configuration.yml:/config/configuration.yml:ro,Z
+Volume=./authelia/configuration.yml.tmpl:/config/configuration.yml:ro,Z
 
 [Service]
 Restart=on-failure
