@@ -1,10 +1,11 @@
----
 advanced:
   log_level: warning
   log_namespaced_levels:
     z2m:mqtt: warning
+devices: devices.yaml
 frontend:
   enabled: true
+groups: groups.yaml
 homeassistant:
   enabled: true
 mqtt:
@@ -12,4 +13,6 @@ mqtt:
   server: mqtt://mosquitto:1883
 onboarding: false
 serial: {}
-version: 4
+version: 5
+availability:
+  enabled: true
