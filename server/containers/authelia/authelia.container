@@ -8,28 +8,31 @@ Wants=postfix.container
 Image=docker.io/authelia/authelia:latest
 ContainerName=authelia
 
+AddCapability=CAP_SETGID
 AutoUpdate=registry
+DropCapability=all
+# Environment variables are more convenient to configure services,
+# For now, we have to rely on configuration.yml.
+# unfortunately not every configuration entry has the equivalent env var in Authelia.
 Environment=AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE=/run/secrets/authelia_ldap_user_password
 Environment=AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE=/run/secrets/authelia_jwt_secret
 Environment=AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/authelia_storage_encryption_key
-# Environment variables are more convenient to configure services,
-# unfortunately not every configuration entry has the equivalent env var in Authelia.
-# For now, we have to rely on configuration.yml.
 Environment=MY_BASE_DN={{ my_base_dn }}
 Environment=MY_DOMAIN={{ my_domain }}
 Environment=X_AUTHELIA_CONFIG_FILTERS=template
 HealthCmd=/app/healthcheck.sh
 HealthInterval=30s
 HealthTimeout=3s
+Label=homepage.description=Authentication and authorization
 Label=homepage.group=Admin
-Label=homepage.name=Authelia
 Label=homepage.href=https://authelia.{{ my_domain }}
 Label=homepage.icon=authelia.png
-Label=homepage.description=Authentication and authorization
+Label=homepage.name=Authelia
 Network=authentication.network
 Network=postfix.network
 Network=postgresql.network
 Network=valkey.network
+NoNewPrivileges=true
 Notify=healthy
 Secret=authelia_jwt_secret
 Secret=authelia_ldap_user_password
