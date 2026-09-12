@@ -68,6 +68,12 @@
   become: true
   become_user: containers
   block:
+    - name: Copy containers configuration files
+      ansible.builtin.copy:
+        src: containers.conf
+        dest: "{{ containers_home }}/.config/containers/"
+        mode: preserve
+
     - name: Create Quadlet destination directory
       ansible.builtin.file:
         mode: "0755"

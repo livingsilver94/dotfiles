@@ -16,7 +16,6 @@ Label=homepage.description=Home automation
 Network=internet.network
 Network=mqtt.network
 Network=webserver.network
-Volume=/etc/localtime:/etc/localtime:ro
 Volume=/run/dbus:/run/dbus:ro,z
 Volume=homeassistant-data.volume:/config:z
 
