@@ -108,6 +108,7 @@
         - postgresql
         - radarr
         - restic
+        - transmission
         - valkey
         - z2m
       loop_control:

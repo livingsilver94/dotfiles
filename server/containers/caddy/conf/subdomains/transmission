@@ -1,0 +1,5 @@
+transmission.{$MY_DOMAIN} {
+	import common
+	import auth_required
+	reverse_proxy transmission:9091
+}
