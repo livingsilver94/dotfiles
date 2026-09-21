@@ -1,0 +1,30 @@
+[Unit]
+Description=Radarr movie collection manager
+After=postgresql.container
+Requires=postgresql.container
+
+[Container]
+Image=lscr.io/linuxserver/radarr:latest
+ContainerName=radarr
+
+AutoUpdate=registry
+Entrypoint=/start.sh
+Label=homepage.description=Movie collection manager
+Label=homepage.group=Media
+Label=homepage.href=https://radarr.{{ my_domain }}
+Label=homepage.icon=radarr.png
+Label=homepage.name=Radarr
+Network=internet.network
+Network=postgresql.network
+Network=webserver.network
+ReadOnly=true
+Secret=radarr_postgres_password
+Volume=./radarr/config.xml:/config/config.xml:Z
+Volume=./radarr/start.sh:/start.sh:ro,Z
+Volume=/media/data/server/arr:/arr:Z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

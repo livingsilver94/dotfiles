@@ -9,6 +9,7 @@ AutoUpdate=registry
 Environment=POSTGRES_PASSWORD_FILE=/run/secrets/postgresql_admin_password
 Network=postgresql.network
 Notify=true
+Secret=radarr_postgres_password
 Secret=postgresql_admin_password
 Volume=./postgresql/init:/docker-entrypoint-initdb.d:ro,Z
 Volume=postgresql-data.volume:/var/lib/postgresql/data:Z

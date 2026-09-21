@@ -106,6 +106,7 @@
         - nextcloud
         - postfix
         - postgresql
+        - radarr
         - restic
         - valkey
         - z2m

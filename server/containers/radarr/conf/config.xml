@@ -1,0 +1,26 @@
+<Config>
+  <LogLevel>info</LogLevel>
+  <UpdateMechanism>Docker</UpdateMechanism>
+  <BindAddress>*</BindAddress>
+  <Port>7878</Port>
+  <UrlBase></UrlBase>
+  <EnableSsl>False</EnableSsl>
+  <LaunchBrowser>False</LaunchBrowser>
+  <AuthenticationMethod>External</AuthenticationMethod>
+  <Branch>master</Branch>
+  <AnalyticsEnabled>False</AnalyticsEnabled>
+  <InstanceName>Radarr</InstanceName>
+  <PostgresHost>postgresql</PostgresHost>
+  <PostgresPort>5432</PostgresPort>
+  <PostgresUser>radarr</PostgresUser>
+  <PostgresPassword>__RADARR_POSTGRES_PASSWORD__</PostgresPassword>
+  <PostgresMainDb>radarr-main</PostgresMainDb>
+  <PostgresLogDb>radarr-log</PostgresLogDb>
+  <AllowedHosts></AllowedHosts>
+  <TrustedNetworks></TrustedNetworks>
+  <AuthenticationRequired>Enabled</AuthenticationRequired>
+  <SslPort>9898</SslPort>
+  <SslCertPath></SslCertPath>
+  <SslCertPassword></SslCertPassword>
+  <ApiKey>3c5c31349bc244ffa91babf5296eb9be</ApiKey>
+</Config>
