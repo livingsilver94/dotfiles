@@ -1,0 +1,4 @@
+[Network]
+InterfaceName=arr-postgresql
+Internal=true
+NetworkName=arr-postgresql

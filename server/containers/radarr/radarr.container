@@ -14,9 +14,8 @@ Label=homepage.group=Media
 Label=homepage.href=https://radarr.{{ my_domain }}
 Label=homepage.icon=radarr.png
 Label=homepage.name=Radarr
-Network=internet.network
-Network=postgresql.network
-Network=webserver.network
+Network=arr.network
+Network=arr-postgresql.network
 ReadOnly=true
 Secret=radarr_postgres_password
 Volume=./radarr/config.xml:/config/config.xml:Z

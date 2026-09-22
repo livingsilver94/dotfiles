@@ -1,0 +1,23 @@
+[Unit]
+Description=Prowlarr indexer manager
+
+[Container]
+Image=lscr.io/linuxserver/prowlarr:latest
+ContainerName=prowlarr
+
+AutoUpdate=registry
+Label=homepage.description=Indexer manager
+Label=homepage.group=Media
+Label=homepage.href=https://prowlarr.{{ my_domain }}
+Label=homepage.icon=prowlarr.png
+Label=homepage.name=Prowlarr
+Network=arr.network
+ReadOnly=true
+Volume=prowlarr-data.volume:/config:Z
+Volume=./prowlarr/config.xml:/config/config.xml:Z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

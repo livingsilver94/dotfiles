@@ -1,0 +1,5 @@
+prowlarr.{$MY_DOMAIN} {
+	import common
+	import auth_required
+	reverse_proxy prowlarr:9696
+}

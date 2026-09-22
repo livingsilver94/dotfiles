@@ -13,8 +13,7 @@ Label=homepage.group=Media
 Label=homepage.href=https://transmission.{{ my_domain }}
 Label=homepage.icon=transmission.png
 Label=homepage.name=Transmission
-Network=internet.network
-Network=webserver.network
+Network=arr.network
 ReadOnly=true
 Volume=transmission-data.volume:/config:Z
 Volume=/media/data/server/arr/torrents:/arr/torrents:Z

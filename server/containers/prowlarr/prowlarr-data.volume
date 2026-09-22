@@ -1,0 +1,8 @@
+[Unit]
+Description=Prowlarr data volume
+
+[Volume]
+VolumeName=prowlarr-data
+
+[Install]
+WantedBy=default.target

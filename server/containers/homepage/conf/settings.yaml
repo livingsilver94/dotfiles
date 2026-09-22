@@ -1,2 +1,20 @@
 ---
+description: Home services dashboard
+disableUpdateCheck: true
+fullWidth: true
+headerStyle: clean
+hideVersion: true
+layout:
+  Admin:
+    style: row
+    columns: 3
+    icon: mdi-shield-check
+  Apps:
+    style: row
+    columns: 3
+    icon: mdi-briefcase
+maxGroupColumns: 4
+target: _self
+theme: dark
 title: Home
+useEqualHeights: true

@@ -1,0 +1,4 @@
+[Network]
+InterfaceName=arr
+IPv6=true
+NetworkName=arr
